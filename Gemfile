@@ -7,6 +7,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'rails-ujs'
+gem 'kaminari', '~> 0.16.3'
+gem 'cancancan', '~> 1.10'
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem 'jquery-rails'

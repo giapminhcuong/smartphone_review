@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
     has_many :product_reviews, dependent: :destroy
     has_many :reviews, through: :product_reviews
     
+    scope :order_by_time, ->{order(created_at: :desc)}
+    
     validates :name, presence: true
     validates :category, presence: true
 end

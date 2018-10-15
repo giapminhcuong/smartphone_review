@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      flash[:success] = "ユーザーを作成させました"
+      flash[:success] = "を作成させました"
       redirect_to root_url
     else
       flash[:danger] = "ユーザーを作成できません"

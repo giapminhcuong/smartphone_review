@@ -16,7 +16,9 @@ $gray91: #e8e8e8;
 }
 
 /* universal */
-
+.container {
+  margin-top: 50px;
+}
 body {
   padding-top: 60px;
 }
@@ -68,17 +70,27 @@ p {
 
 #logo {
   float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: white;
+  margin-left: 100px;
+  margin-right: 50px;
+  font-size: 2.2em;
+  color: red;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: white;
+    color: red;
     text-decoration: none;
   }
+}
+
+.nav-text {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: 	#FF6347;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* footer */
@@ -148,6 +160,9 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .gravatar_edit {

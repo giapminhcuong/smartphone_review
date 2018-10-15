@@ -5,4 +5,9 @@ class Review < ActiveRecord::Base
     has_many :products, through: :product_reviews
     
     has_many :comments, dependent: :destroy
+    
+    validates :title, presence: true
+    validates :content, presence: true
+    
+    scope :order_by_time, ->{order created_at: :desc}
 end
