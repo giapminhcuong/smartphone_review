@@ -1,6 +1,26 @@
-<h1>Editing Comment</h1>
+<div class="modal-header">
+  <h3>コメント編集</h3>
+</div>
 
-<%= render 'form', comment: @comment %>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for @comment,
+      html: {style: "display:inline;"} do |f| %>
+      <div class="modal-body">
+        <ul class="errors"></ul>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', comments_path %>
+        <div class="form-group">
+          <%= f.text_area :content, size: "30x5", class: "form-control" %>
+        </div>
+        <div style="display: inline-block">
+          <%= f.label "レート:" %>
+          <%= f.select(:star, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]])  %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "確認", class: 'btn btn-primary comment-submit pull-right', data: {send: "review"} %>
+        <%= link_to "取消", @comment.review, class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    <% end %>
+  </div>
+</div>

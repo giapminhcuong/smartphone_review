@@ -1,0 +1,37 @@
+<% @comments.each do |comment| %>
+    <div class="comment-container row">
+      <div class="col-sm-2 comment-imagebox ">
+          <img style="avatar" src="<%= comment.user.avatar %>">
+      </div>
+      <div class="comment-box col-sm-10">
+        <div class="comment-header">
+          <p><%= comment.user.name %></p>
+          <p style="font-weight: 400;font-size: 80%"><%= comment.created_at %></p>
+        </div>
+        <!--<hr width="10%" style="border-color: #000">-->
+        <div class="comment-body">
+          <p><%= comment.content %></p>
+          <% comment.star.to_i.times do  %>
+            <span class="glyphicon glyphicon-star"></span>
+          <% end %>
+          <% comment.blank_stars.times do %>
+            <span class="glyphicon glyphicon-star-empty"></span>
+          <% end %>
+          <div style="text-align: right">
+          <% if logged_in? %>
+            <% if can? :edit, comment %>
+              <%= link_to "編集", comment_path(comment), remote: true, class: "btn btn-warning"%>
+            <% end %>
+          <% end %>
+        
+          <% if logged_in? %>
+            <% if can? :destroy, comment %>
+              <%= link_to "削除", comment, method: :delete, class: "btn btn-danger",
+                data: {confirm: "削除しますか？"} %>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
