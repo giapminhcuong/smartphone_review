@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => [:name, :email]
+  
   before_save :downcase_email
   
   has_many :reviews, dependent: :destroy

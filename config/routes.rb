@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :makers
   resources :reviews
   resources :comments
+  get "/results" => "results#index", as: 'results'
 end
