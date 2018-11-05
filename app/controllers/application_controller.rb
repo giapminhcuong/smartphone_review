@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:danger] = exception.message
-    redirect_to request.referrer || root_url
+    redirect_to request.referrer || '/'
   end
    rescue_from ActiveRecord::RecordNotFound do |exception|
     flash[:danger] = exception.message
