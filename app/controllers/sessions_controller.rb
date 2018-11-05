@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
     if check_user
       log_in @user
       flash.now[:success] = "ログインに成功しました"
-      redirect_to root_url
+      if !@user.is_admin
+        redirect_to root_url
+      else
+        redirect_to rails_admin_url
+      end
     else
       flash.now[:danger] = "ログインエラー"
       render :new

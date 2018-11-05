@@ -3,13 +3,18 @@ class Ability
 
   def initialize(user)
     can :read, :all
+    
     if user.present?
       can :create, Product
       can :create, Maker
       can :manage, Review, user_id: user.id
       can :manage, Comment, user_id: user.id
       if user.is_admin?
+        can :access, :rails_admin
+        can :read, :dashboard
         can :manage, :all
+        cannot :destroy, User, :is_admin => true
+        # can :manage, :all
       end
     end
     

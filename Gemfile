@@ -11,6 +11,8 @@ gem 'rails-ujs'
 gem 'kaminari', github: "amatsuda/kaminari", branch: '0-17-stable'
 gem 'cancancan', '~> 1.10'
 gem 'hirb', '~> 0.2.4'
+gem 'rails_admin'
+
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem 'jquery-rails'
