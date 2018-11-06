@@ -1,0 +1,4 @@
+<%= form_tag results_path, method: "get" do %>
+    <%= text_field_tag :query, params[:query], placeholder: '検索', class: 'form-control' %>
+    <%= link_to "Search", results_path, :class => "btn btn-primary" %>
+<% end %>

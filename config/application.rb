@@ -10,5 +10,6 @@ module Workspace
   class Application < Rails::Application
     config.time_zone = "Asia/Bangkok"
     config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.schema_format = :sql
   end
 end

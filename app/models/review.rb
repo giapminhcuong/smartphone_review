@@ -1,4 +1,7 @@
 class Review < ActiveRecord::Base
+    include PgSearch
+    multisearchable :against => [:title, :content]
+    
     belongs_to :user, required: true
     
     has_many :product_reviews, dependent: :destroy
