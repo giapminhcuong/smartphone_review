@@ -6,7 +6,7 @@
             <%= render partial: "results/user", collection: @pg_search_users, as: :user  %>
             <%= paginate @pg_search_users, theme: "twitter-bootstrap-4" %>
         <% end %>
-        
+
         <% if @pg_search_makers.any? %>
             <h3>メーカー:</h3>
             <%= render partial: "results/maker", collection: @pg_search_makers, as: :maker  %>

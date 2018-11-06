@@ -13,7 +13,7 @@
       </div>
       <div class="media-content">
         <p class="title is-4"><%= link_to review.title, review %></p>
-        <p class="subtitle is-6">@<%= review.user.name %></p>
+        <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
         <% if review.products %>
         <ul>
           <% review.products.each do |x| %>

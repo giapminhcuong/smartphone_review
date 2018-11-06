@@ -14,6 +14,6 @@ class Review < ActiveRecord::Base
     validates :title, presence: true
     validates :content, presence: true
     
-    scope :order_by_time, ->{order created_at: :asc}
+    scope :order_by_time, ->{order created_at: :desc}
     scope :order_by_cmt, ->{order cmt_count: :desc}
 end
