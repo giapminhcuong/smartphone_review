@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource param_method: :user_params
+  
   def new
     @user = User.new
   end
+  
   def create
     @user = User.new user_params
     if @user.save
@@ -11,6 +14,11 @@ class UsersController < ApplicationController
       flash[:danger] = "ユーザーを作成できません"
       render :new
     end
+  end
+  
+  def show
+    @reviews = @user.reviews.all.order_by_time
+    @comments = @user.comments.all.order_by_time
   end
   
   private
