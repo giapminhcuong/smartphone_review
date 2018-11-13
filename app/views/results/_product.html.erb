@@ -1,2 +1,16 @@
-<%= link_to product.searchable.name, product.searchable %>
-<br>
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card">
+    <%= cl_image_tag(product.searchable.image, {:style => "height:200px; display: block; margin-left: auto; margin-right: auto;"}) %>
+    <div class="card-body">
+      <h4 class="card-title" style="text-align: center; height: 30px;">
+        <%= link_to product.searchable.name, product.searchable %>
+      </h4>
+    </div>
+    <hr>
+    <div class="card-footer">
+      <h5 class="card-title"><strong><%= product.searchable.category %></strong></h5>
+      <h5 class="card-title"><strong><%= product.searchable.maker.name %></strong></h5>
+    </div>
+  </div>
+</div>
+ 

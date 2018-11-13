@@ -1,31 +1,106 @@
 <div class="blog">
   <div class="container">
     <div class="row">
+      <div class="cart-summary" style="height:310px;">
         <h1>ユーザープロフィール</h1>
         <div class="col-md-4">
-            <img style="avatar" src="<%= @user.avatar %>">
+            <img class="avatar150" src="<%= @user.avatar %>">
         </div>
         <div class="col-md-6">
             <h3>ニックネーム: <%= @user.name %></h3>
             <h3>メールアドレス: <%= @user.email %></h3>
+            
+            <% if logged_in? %>
+              <% if can? :edit, @user %>
+                <button type="button" class="btn btn-primary" style="margin-top:50px; float: right;">
+                <%= link_to "編集", edit_user_path(@user) %>
+                </button>
+              <% end %>
+            <% end %>
         </div>
+      </div>
     </div>
     
     <hr><hr><hr>
     
     <% if @reviews.any? %>
+      <div class="row">
         <h3>ユーザーのレビュー</h3>
-        <%= render partial: "reviews/review", collection: @reviews, as: :review %>
+        <% @reviews.each do |review| %>
+        <div class="col-lg-6 col-md-6">
+        <div class="card" style="width: 441px; height: 480px;">
+          <div class="card-image-top" >
+            <% if review.banner.present? %>
+             <%= cl_image_tag(review.banner) %>
+           <% else %>
+             <%= image_tag("no-banner.png") %><br><br>
+           <% end %>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="avatar48">
+                  <% if review.user.avatar.present? %>
+                   <%= cl_image_tag(review.user.avatar) %>
+                 <% else %>
+                   <%= image_tag("no_avatar.jpg") %>
+                 <% end %>
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4"><%= link_to review.title, review %></p>
+                <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
+                <% if review.products %>
+                <ul>
+                  <% review.products.each do |x| %>
+                    <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
+                  <% end %>
+                </ul>
+                <% end %>
+                <hr>
+                <div class="blog_post_meta">
+                      <i class="fa fa-comment-o"></i>
+                      <%= review.comments.count %> コメント
+                      <% if logged_in? %>
+                        <% if can? :edit, review %>
+                          <%= link_to edit_review_path(review), :class => "btn btn-primary a-btn-slide-text" do %>
+                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              <span>編集</span>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                      <% if logged_in? %>
+                        <% if can? :destroy, review %>
+                          <%= link_to review, method: :delete, data: {confirm: "削除しますか？"}, :class => "btn btn-primary a-btn-slide-text" do %>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <span>削除</span>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                </div>
+                <time class="is-6" datetime="2016-1-1"><%= review.created_at.strftime "%l:%M %p - %_m %b %Y" %></time>
+              </div>
+            </div>
+        
+            <div class="content">
+              <%= review.content %>
+            </div>
+          </div>
+        </div>
+        </div>
+      <% end %>
+      </div>
     <% end %>
     
     <hr><hr><hr>
     
     <% if @comments.any? %>
+      <div class="row">
         <h3>ユーザーのコメント</h3>
         <% @comments.each do |comment| %>
             <div class="comment-container row">
               <div class="col-sm-2 comment-imagebox ">
-                  <img style="avatar" src="<%= comment.user.avatar %>">
+                  <img class="avatar150" src="<%= comment.user.avatar %>">
               </div>
               <div class="comment-box col-sm-10">
                 <div class="comment-header">
@@ -59,6 +134,7 @@
               </div>
             </div>
         <% end %>
+      </div>
     <% end %>
     
   </div>

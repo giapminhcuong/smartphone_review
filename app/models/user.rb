@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  mount_uploader :avatar, AvatarUploader
     
     
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

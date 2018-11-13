@@ -11,12 +11,13 @@ class ReviewsController < ApplicationController
     
     def new
         @review = Review.new
+        @review.products.build
     end
     
     def create
         @review = current_user.reviews.build review_params
         if @review.save
-          flash[:success] = "レビューを投稿しました"
+          flash[:success] = "レビューを投稿されました"
           redirect_to @review
         else
           render :new
@@ -32,7 +33,7 @@ class ReviewsController < ApplicationController
         
     def update
         if @review.update_attributes review_params
-          flash[:success] = "レビューを編集しました"
+          flash[:success] = "レビューを更新されました"
           redirect_to @review
         else
           render :edit
@@ -41,12 +42,12 @@ class ReviewsController < ApplicationController
         
     def destroy
         @review.destroy
-        flash[:success] = "レビューを削除しました"
+        flash[:success] = "レビューを削除されました"
         redirect_to reviews_url
     end
 
     private
         def review_params
-            params.require(:review).permit :title, :content, products_attributes: [:id, :name, :category, :maker_id]
+            params.require(:review).permit :title, :banner, :content, :product_ids
         end
 end

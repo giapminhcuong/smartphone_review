@@ -1,12 +1,9 @@
-/****** レビュー登録 CSS ******/
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
 /* HEADER SECTION */
 
 header {
-    position: relative;
-
 }
 
 .user_action {
@@ -127,10 +124,10 @@ header {
 }
 
 .card {
+    margin: 50px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
-    margin-bottom: 50px;
 }
 
 .card-title {
@@ -140,7 +137,123 @@ header {
   color: gray;
 }
 .card-img-top {
-    height: 200px;
     align-items: center;
     border-radius: 5px 5px 0 0;
 }
+
+/* NEW NAVBAR */
+
+/* NAVBAR CHUNG */
+
+.navbar{
+    background-color: rgba(255,255,255);;
+    border-color: #E7E7E7; 
+    margin-bottom: 0px;
+}
+
+.navbar-abs {
+    width: 100%;
+}
+
+/* NUT HOME */
+
+.navbar-custom {
+    margin-left: 50px;
+    
+}
+
+/*  */
+.navbar-menu a {
+    color: #000;
+}
+.navbar-menu li {
+    font-weight: bold;
+    transition: opacity 0.2s ease;
+    opacity: 0.5;
+}
+
+.navbar-menu li:hover {
+    opacity: 1;
+
+}
+
+.nav>li>a:hover, .nav .open > a:focus {
+    background-color: #fff;
+}
+
+
+.search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 1px solid #00B4CC;
+  padding: 5px;
+  height: 35px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  position: absolute;  
+  right: 0px;
+  width: 37px;
+  height: 31px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 20%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -35%);
+}
+
+.avatar48{
+    border:0.25px solid black;
+    height: 48px;
+    width: 48px;
+}
+
+.avatar150 {
+    display: block; margin-left: auto; margin-right: auto;
+    border:0.5px solid black;
+    height: 150px;
+    width: 150px;
+    border-radius:50%;
+}
+
+.avatar200 {
+    display: block; margin-left: auto; margin-right: auto;
+    border:0.5px solid black;
+    height: 200px;
+    width: 200px;
+    border-radius:50%;
+}
+
+.cart-summary {
+   background-color: #f5f7fa;
+   margin-top: 118px;
+   position: relative;
+   z-index: 1;
+   padding: 30px 20px;
+}
+   .summary-table {
+       margin-top: 30px;
+   }

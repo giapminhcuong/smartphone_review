@@ -2,6 +2,8 @@ class Review < ActiveRecord::Base
     include PgSearch
     multisearchable :against => [:title, :content]
     
+    mount_uploader :banner, BannerUploader
+    
     belongs_to :user, required: true
     
     has_many :product_reviews, dependent: :destroy
