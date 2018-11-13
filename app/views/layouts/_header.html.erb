@@ -1,50 +1,60 @@
+<!DOCTYPE html>
+
 <header>
-    <!-- HEADER -->
-    <nav style="margin-bottom: 0"class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <%= link_to "スマホホーム", root_path, id: "logo" %>
-            </div>
-            
-            <form class="navbar-form navbar-left">
-                <div class="input-group">
-                    <%= render "search/form" %>
-                </div>
-            </form>
-                
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-text"><%= link_to "商品", products_path %></li>
-                <li class="nav-text" style="margin-right: 100px;"><%= link_to "レビュー", reviews_path %></li>
-                
-                <% if logged_in? %>
-                  <li style="padding-right: 10px">
-                      <figure class="image is-48x48">
-                          <img src="<%= current_user.avatar %>" alt="">
-                      </figure>
-                  </li>
-                  <li class="nav-text"><%= link_to current_user.name, current_user %></li>
-                  <li class="dropdown nav-text"><button type="button" class="btn btn-default btn-lg">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        アカウント
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><%= link_to "レビュー投稿", new_review_path %></li>
-                        <li><%= link_to "プロフィール", current_user %></li>
-                        <li><%= link_to "プロフィール編集", "#" %></li>
-                        <li class="divider"></li>
-                        <li>
-                            <%= link_to "サインアウト", logout_path, method: :delete %>
-                        </li>
-                    </ul>
-                    </button>
-                  </li>
-                <% else %>
-                  <li class="nav-text"><button type="button" class="btn btn-default btn-lg"><%= link_to "サインイン", login_path %></button></li>
-                  <li class="nav-text"><button type="button" class="btn btn-default btn-lg"><%= link_to "サインアップ", signup_path %></button></li>
-                <% end %>
+      <nav class="navbar ">
+        <div style="width: 100%; padding: 0 35px">
+          <div class="navbar-custom">
+            <%= link_to "スマホホーム", root_path, id: "logo" %>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <ul class="nav navbar-nav navbar-right navbar-menu">
+              <li><%= link_to "商品", products_path %></li>
+              <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path %></li>
+              <% if logged_in? %>
+                <li class="dropdown">
+                  <a
+                    href="#"
+                    class="dropdown-toggle"
+                    data-toggle="dropdown"
+                    role="button"
+                    aria-haspopup="true" 
+                    aria-expanded="false"
+                  >
+                    <%= current_user.name %> <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <% if current_user.is_admin? %>
+                      <li><%= link_to "管理ダッシュボード", rails_admin_path %></li>
+                      <li class="divider"></li>
+                    <% end %>
+                    <li><%= link_to "プロフィール", current_user %></li>
+                    <li><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "レビュー投稿", new_review_path %></li>
+                    <li><%= link_to "商品投稿", new_product_path %></li>
+                    <li class="divider"></li>
+                    <li>
+                        <%= link_to "サインアウト", logout_path, method: :delete %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li style="display: flex;"><span class="glyphicon glyphicon-log-in" style="height: 50%;top: 33%;"></span><%= link_to "サインイン", login_path, {:style => "padding-left: 5px"} %></li>
+                <li style="display: flex;"><span class="glyphicon glyphicon-pencil" style="height: 50%;top: 33%;"></span><%= link_to "サインアップ", signup_path, {:style => "padding-left: 5px"} %></li>
+              <% end %>
             </ul>
+            <div class="wrap">
+              <div class="search">
+                <%= form_tag results_path, method: :get do %>
+                    <%= text_field_tag :query, params[:query], placeholder: '検索', :class => "searchTerm" %>
+                <% end %>
+              </div>
+            </div>
+          
+          <!-- /.navbar-collapse -->
         </div>
-    </nav>
-    <img src="./assets/banner.jpg" alt="" style="width: 100%">
+        <!-- /.container-fluid -->
+      </nav>
 </header>

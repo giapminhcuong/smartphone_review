@@ -7,11 +7,12 @@
             <div class="blog_post_title">
               <%= @review.title %>
             </div>
-
             <div class="blog_post_image">
-              <figure class="image" >
-                <img src="<%= @review.banner%>" style="height: 300px;border-radius: 5px 5px 0 0;" alt="Placeholder image">
-              </figure>
+              <% if @review.banner.present? %>
+               <%= cl_image_tag(@review.banner) %>
+             <% else %>
+               <%= image_tag("no-banner.png") %><br><br>
+             <% end %>
             </div>
             
             <div class="blog_post_meta">
@@ -20,21 +21,21 @@
                   <i class="fa fa-comment-o"></i>
                   <%= @review.comments.count %> コメント
                 </li>
-                <li class="blog_post_meta_item">
-                  <% if logged_in? %>
-                    <% if can? :edit, @review %>
-                      <%= link_to "編集", edit_review_path(@review) %>
-                    <% end %>
+                <% if logged_in? %>
+                  <% if can? :edit, @review %>
+                    <li class="blog_post_meta_item">
+                    <%= link_to "編集", edit_review_path(@review) %>
+                    </li>
                   <% end %>
-                </li>
-                <li class="blog_post_meta_item">
-                  <% if logged_in? %>
-                    <% if can? :destroy, @review %>
+                <% end %>
+                <% if logged_in? %>
+                  <% if can? :destroy, @review %>
+                    <li class="blog_post_meta_item">
                       <%= link_to "削除", @review, method: :delete,
                         data: {confirm: "削除しますか？"} %>
-                    <% end %>
+                    </li>
                   <% end %>
-                </li>
+                <% end %>
               </ul>
             </div>
 
@@ -126,7 +127,9 @@
         <div class="sidebar_archives">
           <div class="sidebar_title">筆者</div>
           <h3 style="text-align: center;"><%= link_to @review.user.name, @review.user %></h3>
-            <img src="<%= @review.user.avatar %>">
+          <figure class="avatar200">
+            <img class="avatar200" src="<%= @review.user.avatar %>" alt="">
+          </figure>
         </div>
 
         <div class="sidebar_categories">
@@ -141,7 +144,9 @@
                       <h5 class="card-title">品名：<%= x.name %></h5>
                       <p class="card-text">メーカー：<%= x.maker.name %></p>
                       <p class="card-text">カテゴリー：<%= x.category %></p>
-                      <a href="products/<%= x.id %>" class="btn btn-primary">商品を見る</a>
+                      <%= link_to x do %>
+                        <button type="button" class="btn btn-info">商品を見る</button>
+                      <% end %>
                     </div>
                   </div>
                 <% end %>

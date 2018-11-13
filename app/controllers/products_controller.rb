@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   
   def new
     @product = Product.new
+    @product.build_maker
   end
   
   def show
@@ -14,18 +15,36 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new user_params
+    @product = Product.new product_params
     if @product.save
-      flash[:success] = "ユーザーを作成させました"
-      redirect_to root_url
+      flash[:success] = "商品を作成させました"
+      redirect_to @product
     else
-      flash[:danger] = "ユーザーを作成できません"
+      flash[:danger] = "商品を作成できません"
       render :new
     end
   end
-  
+
+        
+    def edit; end
+        
+    def update
+        if @product.update_attributes product_params
+          flash[:success] = "商品を更新されました"
+          redirect_to products_url
+        else
+          render :edit
+        end
+    end
+        
+    def destroy
+        @product.destroy
+        flash[:success] = "商品を削除されました"
+        redirect_to request.referrer || products_url
+    end
+    
   private
   def product_params
-    params.require(:product).permit :name, :category, :maker
+    params.require(:product).permit :name, :category, :image, :maker_id
   end
 end

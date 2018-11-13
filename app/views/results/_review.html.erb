@@ -1,2 +1,61 @@
-<%= link_to review.searchable.title, review.searchable %>
-<br>
+<div class="col-lg-6 col-md-6">
+<div class="card" style="width: 441px; height: 480px;">
+  <div class="card-image-top" >
+    <% if review.searchable.banner.present? %>
+     <%= cl_image_tag(review.searchable.banner) %>
+   <% else %>
+     <%= image_tag("no-banner.png") %><br><br>
+   <% end %>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="avatar48">
+          <% if review.searchable.user.avatar.present? %>
+           <%= cl_image_tag(review.searchable.user.avatar) %>
+         <% else %>
+           <%= image_tag("no_avatar.jpg") %>
+         <% end %>
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4"><%= link_to review.searchable.title, review.searchable %></p>
+        <p class="subtitle is-6">@<%= link_to review.searchable.user.name, review.searchable.user %></p>
+        <% if review.searchable.products %>
+        <ul>
+          <% review.searchable.products.each do |x| %>
+            <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
+          <% end %>
+        </ul>
+        <% end %>
+        <hr>
+        <div class="blog_post_meta">
+              <i class="fa fa-comment-o"></i>
+              <%= review.searchable.comments.count %> コメント
+              <% if logged_in? %>
+                <% if can? :edit, review.searchable %>
+                  <%= link_to edit_review_path(review.searchable), :class => "btn btn-primary a-btn-slide-text" do %>
+                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                      <span>編集</span>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% if logged_in? %>
+                <% if can? :destroy, review.searchable %>
+                  <%= link_to review.searchable, method: :delete, data: {confirm: "削除しますか？"}, :class => "btn btn-primary a-btn-slide-text" do %>
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span>削除</span>
+                  <% end %>
+                <% end %>
+              <% end %>
+        </div>
+        <time class="is-6" datetime="2016-1-1"><%= review.searchable.created_at.strftime "%l:%M %p - %_m %b %Y" %></time>
+      </div>
+    </div>
+
+    <div class="content">
+      <%= review.searchable.content %>
+    </div>
+  </div>
+</div>
+</div>

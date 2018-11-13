@@ -1,7 +1,7 @@
 <div class="container">
   <h1><%= @product.name %></h1>
   
-  <img class="card-img-top" src="<%= @product.image %>" alt="">
+  <%= cl_image_tag(@product.image) %>
   
   <h4>カテゴリー: <%= @product.category %></h4>
   <h4>メーカー: <%= @product.maker.name %></h4>

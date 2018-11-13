@@ -1,14 +1,32 @@
-<%= form_for(@review) do |f| %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+ <%= form_for(@review) do |f| %>
+  <div class="row">
+      <div class="col-12 col-lg-8">
+           <div class="col-12 mb-3">
+             <%= f.label :title, "タイトル" %>
+             <%= f.text_field :title, class:"form-control" %>
+           </div>
+           
+           <div class="col-12 mb-3">
+             <%= f.label :banner, "バナー" %><br>
+             <%= f.file_field :banner %>
+           </div>
+           
+           <div class="col-12 mb-3">
+             <%= f.label :content, "内容" %>
+             <%= f.text_area :content, rows: 15, class: "form-control" %>
+           </div>
+           
+     </div>
+     
+     <div class="col-12 col-lg-4">
+        <div class="cart-summary">
+            <%= f.label :product_ids, "商品" %>
+            <%= f.select :product_ids, Product.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+        </div>
+     </div>
+     <hr>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div class="row">
+      <%= f.submit "完了", :class => "btn btn-outline-success", :style => "width: 100px; margin: 10px;" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+ <% end %>

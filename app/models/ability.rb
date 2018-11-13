@@ -5,6 +5,7 @@ class Ability
     can :read, :all
     
     if user.present?
+      can :update, User, id: user.id
       can :create, Product
       can :create, Maker
       can :manage, Review, user_id: user.id
@@ -13,7 +14,7 @@ class Ability
         can :access, :rails_admin
         can :read, :dashboard
         can :manage, :all
-        cannot :destroy, User, :is_admin => true
+        # cannot :destroy, User, :is_admin => true
         # can :manage, :all
       end
     end

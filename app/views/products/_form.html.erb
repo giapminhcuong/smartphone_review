@@ -1,0 +1,25 @@
+<%= form_for(@product) do |f| %>
+  <div class="row">
+   <div class="col-12 mb-3">
+     <%= f.label :name, "品名" %>
+     <%= f.text_field :name, class:"form-control" %>
+   </div>
+   
+    <div class="col-12 mb-3">
+     <%= f.label :category, "カテゴリー" %>
+     <%= f.text_field :category, class: "form-control" %>
+   </div>
+   
+   <div class="col-12 mb-3">
+     <%= f.label :image, "写真" %><br>
+     <%= f.file_field :image %>
+   </div>
+   
+   <div class="col-12 mb-3">
+     <%= f.label :maker_id, "メーカー" %>
+     <%= f.select :maker_id, Maker.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+   </div>
+   <hr>
+   <%= f.submit "完了", :class => "btn btn-outline-success" %>
+  </div>
+<% end %>
