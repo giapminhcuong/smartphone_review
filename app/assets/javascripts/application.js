@@ -14,4 +14,5 @@
 //= require jquery_nested_form
 //= require bootstrap
 //= require rails-ujs
+//= require chosen
 //= require_tree .

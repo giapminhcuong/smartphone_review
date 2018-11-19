@@ -10,11 +10,14 @@ class ReviewsController < ApplicationController
     end
     
     def new
-        @review = Review.new
-        @review.products.build
+        @review = current_user.reviews.new
     end
     
     def create
+        id = review_params['product_ids']
+        print(id)
+        review= review_params.delete('product_ids')
+        print(review)
         @review = current_user.reviews.build review_params
         if @review.save
           flash[:success] = "レビューを投稿されました"
@@ -48,6 +51,6 @@ class ReviewsController < ApplicationController
 
     private
         def review_params
-            params.require(:review).permit :title, :banner, :content, products_attribute: [:name]
+            params.require(:review).permit(:title, :banner, :content, :product_ids => [])
         end
 end

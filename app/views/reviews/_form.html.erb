@@ -1,4 +1,4 @@
-<%= nested_form_for @review do |f| %>
+<%= simple_form_for @review do |f| %>
   <div class="row">
    <h1>レビュー投稿</h1>
       <div class="col-12 col-lg-8">
@@ -11,29 +11,17 @@
              <%= f.label :banner, "バナー" %><br>
              <%= f.file_field :banner %>
            </div>
-           
+           <br> <br> 
+           <div class="col-12 mb-3">
+           <%= f.label :product_ids, "内容" %>
+           <%= f.input :product_ids, as: :select, :collection => Product.order(:name) , label_method: :name, input_html: {multiple: true}, label: false %>
+           </div>
+           <br> 
            <div class="col-12 mb-3">
              <%= f.label :content, "内容" %>
              <%= f.text_area :content, rows: 15, class: "form-control" %>
            </div>
            
-     </div>
-     
-     <div class="col-12 col-lg-4">
-        <div class="cart-summary">
-           <div class="form-group">
-               <%= f.label :products, "商品" %>
-               <%= f.fields_for :products do |task_form| %>
-                 <%= task_form.select :name, Product.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
-                 <%= task_form.link_to_remove "削除" %>
-               <% end %>
-               <br>
-               <%= f.link_to_add "商品を追加", :products %>
-               <hr>
-               <br>
-               <p>商品がない？ <%= link_to "商品投稿", new_product_path %></p>
-             </div>
-        </div>
      </div>
      <hr>
   </div>

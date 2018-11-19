@@ -1,17 +1,135 @@
-
+<link href="../assets/homepage.css" rel="stylesheet" id="bootstrap-css">
+    <head>
+    <meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<meta name="author" content="sumit kumar"> 
+	<title>blog</title> 
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+        
+        
+    </head>
+<body>
+ 
   <div style="width: 100% ">
      <img src="./assets/banner.jpg" alt="" style="width: 100%">
   </div>
 <% provide :title, "ホームページ" %>
 <div>
-  <div class="container d-flex h-100 align-items-center">
-    <div class="mx-auto text-center">
-      <h1 class="mx-auto my-0 text-uppercase">ホームページ</h1>
+  <section id="blog-section" >
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8">
+           <div class="row">
+             <% @newest_reviews.each do| new| %>
+              <div class="col-lg-6 col-md-6">
+             <aside>
+                <img src="<%= new.banner %>" class="img-responsive" style = "height:200px">
+                <div class="content-title" style = "height:88px">
+				<div class="text-center">
+				<h3><a href="/reviews/<%=new.id%>"></a><%= new.title %></a></h3>
+				</div>
+				</div>
+				<div class="content-footer">
+				<img class="user-small-img" src="<%= new.user.avatar %>">
+				<span style="font-size: 16px;color: #fff;"><%= new.user.name %></span>
+				<span class="pull-right">
+				<a href="#" data-toggle="tooltip" data-placement="left" title="Comments"><i class="fa fa-comments" ></i><%= new.comments.count %></a>
+				<a href="#" data-toggle="tooltip" data-placement="right" title="Loved"><i class="fa fa-heart"></i><% if new.comments.count>0 %><%=new.comments.sum(:star)/new.comments.count%><%else%> 0<%end %></a>                  
+				</span>
+                    <div class="user-ditels">
+                    <div class="user-img"><img src="<%= new.user.avatar %>" class="img-responsive"></div>
+                        <span class="user-full-ditels">
+                        <h3><%= new.user.name %></h3>
+                        <p><%= new.user.email %></p>
+                        </span>
+                    </div>
+				</div>
+             </aside>
+            </div>
+               
+            <%end%>
+            </div>
+            </div>
+<!--           // RECENT POST===========-->
+         <div class="col-lg-4" style =" width:360px">           
+               <div class="widget-sidebar">
+                 <h2 class="title-widget-sidebar">// RECENT POST</h2>
+                   <div class="content-widget-sidebar">
+                    <ul>
+                       <% @top_reviews.each do| top| %>
+                     <li class="recent-post">
+                        <div class="post-img">
+                         <img src="<%= top.banner %>" class="img-responsive">
+                         </div>
+                         <a href=/reviews/<%=top.id%>"><h5><%= top.title %></h5></a>
+                         <p><small><i class="fa fa-calendar" data-original-title="" title=""></i> <%= top.created_at %></small></p>
+                        </li>
+                        <hr>
+                        <%end%>
+                    </ul>
+                   </div>
+                 </div>
+
+            
+              <!--=====================
+                    NEWSLATTER
+             ======================-->
+<div class="widget-sidebar">
+ <h2 class="title-widget-sidebar">// NEWSLATTER</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut .</p>  
+<div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+      <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+    </div>
+    <button type="button" class="btn btn-warning">Warning</button>
+             </div>  
+                 
+                 
+             </div>
+           </div>
+         </div>
+    
+
+</section>
+
+      
+      
+      
+      
       <% if !logged_in? %>
       <div>
         <%= link_to "サインアップ", signup_path, class: "btn btn-lg btn-primary" %>
       </div>
       <% end %>
     </div>
-  </div>
-</divr>
+</body>
+	
+	 <script src="js/jquery-3.1.1.js"></script>
+	 <script src="js/bootstrap.js"></script>
+	 <script>
+         $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip(); 
+         });
+         
+         
+        
+      
+         
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  }
+}
+</script>

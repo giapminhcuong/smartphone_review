@@ -18,4 +18,5 @@ class Review < ActiveRecord::Base
     
     scope :order_by_time, ->{order created_at: :desc}
     scope :order_by_cmt, ->{order cmt_count: :desc}
+    
 end
