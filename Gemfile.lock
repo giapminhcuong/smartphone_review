@@ -253,6 +253,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari!
+  nested_form
   pg (= 0.21)
   pg_search
   rails (= 5.2.1)

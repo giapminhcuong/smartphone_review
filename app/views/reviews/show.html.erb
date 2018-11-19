@@ -127,9 +127,11 @@
         <div class="sidebar_archives">
           <div class="sidebar_title">筆者</div>
           <h3 style="text-align: center;"><%= link_to @review.user.name, @review.user %></h3>
-          <figure class="avatar200">
-            <img class="avatar200" src="<%= @review.user.avatar %>" alt="">
-          </figure>
+          <% if @review.user.avatar.present? %>
+           <%= cl_image_tag(@review.user.avatar, {:style => "display: block; margin-left: auto; margin-right: auto; border:0.5px solid black; height: 200px; width: 200px; border-radius:50%;" }) %>
+         <% else %>
+           <%= image_tag "no_avatar.jpg", :class => "avatar200" %>
+         <% end %>
         </div>
 
         <div class="sidebar_categories">
@@ -139,7 +141,7 @@
               <% if @review.products %>
                 <% @review.products.each do |x| %>
                   <div class="card" style="width: 40rem;">
-                    <img class="card-img-top" src="<%= x.image %>" alt="Card image cap">
+                    <%= cl_image_tag(x.image, {:style => "height:200px; display: block; margin-left: auto; margin-right: auto;"}) %>
                     <div class="card-body">
                       <h5 class="card-title">品名：<%= x.name %></h5>
                       <p class="card-text">メーカー：<%= x.maker.name %></p>

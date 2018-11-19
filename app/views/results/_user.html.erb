@@ -1,2 +1,13 @@
-<%= link_to user.searchable.name, user.searchable %>
-<br>
+<div class="cart-summary" style="height:200px; margin-top: 0px;">
+<div class="col-md-4">
+     <% if user.searchable.avatar.present? %>
+       <%= cl_image_tag(user.searchable.avatar, {:style => "display: block; margin-left: auto; margin-right: auto; border:0.5px solid black; height: 150px; width: 150px; border-radius:50%;" }) %>
+     <% else %>
+       <%= image_tag "no_avatar.jpg", :class => "avatar150" %>
+     <% end %>
+</div>
+<div class="col-md-6">
+    <h3>ニックネーム: <%= link_to user.searchable.name, user.searchable %></h3>
+    <h3>メールアドレス: <%= user.searchable.email %></h3>
+</div>
+</div>

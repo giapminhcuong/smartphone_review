@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     can :read, :all
+    can :create, User
     
     if user.present?
       can :update, User, id: user.id
