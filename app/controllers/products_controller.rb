@@ -18,7 +18,11 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     if @product.save
       flash[:success] = "商品を作成させました"
-      redirect_to @product
+      if URI(request.referer).path == new_review_path
+        redirect_to new_review_path
+      else
+        redirect_to @product
+      end
     else
       flash[:danger] = "商品を作成できません"
       render :new

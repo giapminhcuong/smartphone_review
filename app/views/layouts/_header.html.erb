@@ -12,6 +12,18 @@
             <ul class="nav navbar-nav navbar-right navbar-menu">
               <li><%= link_to "商品", products_path %></li>
               <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path %></li>
+              
+              <% if logged_in? %>
+                <% if current_user.is_admin? %>
+                  <% noti = Product.where(state: false).count %>
+                  <% if noti != 0 %>
+                  <li>
+                    <a href="https://smartphone-anhph.c9users.io/admin/product" ><span class="glyphicon glyphicon-bell"></span><sup><%= noti %></sup></a>
+                  </li>
+                  <% end %>
+                <% end %>
+              <% end %>
+              
               <% if logged_in? %>
                 <li class="dropdown">
                   <a

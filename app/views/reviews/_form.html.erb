@@ -1,5 +1,6 @@
- <%= form_for(@review) do |f| %>
+<%= nested_form_for @review do |f| %>
   <div class="row">
+   <h1>レビュー投稿</h1>
       <div class="col-12 col-lg-8">
            <div class="col-12 mb-3">
              <%= f.label :title, "タイトル" %>
@@ -20,8 +21,18 @@
      
      <div class="col-12 col-lg-4">
         <div class="cart-summary">
-            <%= f.label :product_ids, "商品" %>
-            <%= f.select :product_ids, Product.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+           <div class="form-group">
+               <%= f.label :products, "商品" %>
+               <%= f.fields_for :products do |task_form| %>
+                 <%= task_form.select :name, Product.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+                 <%= task_form.link_to_remove "削除" %>
+               <% end %>
+               <br>
+               <%= f.link_to_add "商品を追加", :products %>
+               <hr>
+               <br>
+               <p>商品がない？ <%= link_to "商品投稿", new_product_path %></p>
+             </div>
         </div>
      </div>
      <hr>

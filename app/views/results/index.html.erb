@@ -1,29 +1,47 @@
 <div class="blog">
   <div class="container">
     <div class="row">
+        <h1>検索結果</h1>
+        <div class="row">
         <% if @pg_search_users.any? %>
             <h3>ユーザー:</h3>
             <%= render partial: "results/user", collection: @pg_search_users, as: :user  %>
             <%= paginate @pg_search_users, theme: "twitter-bootstrap-4" %>
         <% end %>
+        </div>
 
+        <div class="row">
         <% if @pg_search_makers.any? %>
             <h3>メーカー:</h3>
             <%= render partial: "results/maker", collection: @pg_search_makers, as: :maker  %>
             <%= paginate @pg_search_makers, theme: "twitter-bootstrap-4" %>
         <% end %>
+        </div>
 
+         <div class="row">
          <% if @pg_search_products.any? %>
             <h3>商品:</h3>
             <%= render partial: "results/product", collection: @pg_search_products, as: :product  %>
             <%= paginate @pg_search_products, theme: "twitter-bootstrap-4" %>
         <% end %>
+        </div>
         
+         <div class="row">
          <% if @pg_search_reviews.any? %>
             <h3>レビュー:</h3>
             <%= render partial: "results/review", collection: @pg_search_reviews, as: :review  %>
             <%= paginate @pg_search_reviews, theme: "twitter-bootstrap-4" %>
         <% end %>
+        </div>
+        
+        <div class="row">
+        <% if !@pg_search_documents.any? %>
+        <%= image_tag 'noti-search.png', :style =>"display: block; margin-left: auto; margin-right: auto;" %>
+        <hr><hr>
+        <h3>「 <%= params[:query] %> 」一致する結果は見つかりませんでした。</h3>
+        <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+        <% end %>
+        </div>
     </div>
   </div>
 </div>

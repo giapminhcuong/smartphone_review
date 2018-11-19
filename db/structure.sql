@@ -178,7 +178,8 @@ CREATE TABLE products (
     category character varying,
     maker_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    state boolean DEFAULT false
 );
 
 
@@ -431,6 +432,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181012142315'),
 ('20181012142640'),
 ('20181012142859'),
-('20181105024929');
+('20181105024929'),
+('20181119084301');
 
 

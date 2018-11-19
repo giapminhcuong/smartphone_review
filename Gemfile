@@ -15,6 +15,7 @@ gem "pg_search"
 gem 'rails_admin'
 gem 'carrierwave'
 gem 'cloudinary'
+gem "nested_form"
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem 'jquery-rails'
