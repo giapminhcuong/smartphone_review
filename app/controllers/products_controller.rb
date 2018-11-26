@@ -2,7 +2,14 @@ class ProductsController < ApplicationController
   load_and_authorize_resource param_method: :product_params
   
   def index
-    @products = Product.all.page(params.permit![:page]).per(9)
+    @products = if params[:category].present?
+                  Product.by_category(params[:category]).page(params.permit![:page]).per(9)
+                else 
+                  Product.all.page(params.permit![:page]).per(9)
+                end
+    @products = @products.price_asc.page(params.permit![:page]).per(9) if (params[:field] == "yasui")
+    @products = @products.price_desc.page(params.permit![:page]).per(9) if (params[:field] == "takai")
+    @products = @products.order_by_time.page(params.permit![:page]).per(9) if params[:field] == "time"
   end
   
   def new

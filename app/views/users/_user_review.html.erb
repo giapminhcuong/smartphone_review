@@ -1,0 +1,67 @@
+<div class="row">
+    <% @reviews.each do |review| %>
+        <div class="col-lg-6 col-md-6">
+            <div class="card" >
+              <div class="card-image-top" style="width: 100%; height: 150px;" >
+                <% if review.banner.present? %>
+                 <%= cl_image_tag(review.banner, {:style => "width: 100%; height: 150px;"}) %>
+               <% else %>
+                 <%= image_tag("no-banner.png", {:style => "width: 100%; height: 150px;"}) %>
+               <% end %>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="avatar48">
+                      <% if review.user.avatar.present? %>
+                       <%= cl_image_tag(review.user.avatar) %>
+                     <% else %>
+                       <%= image_tag("no_avatar.jpg") %>
+                     <% end %>
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-4"><%= link_to review.title, review %></p>
+                    <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
+                    <div style="height: 57px;">
+                      <% if review.products %>
+                        <ul>
+                          <% review.products.each do |x| %>
+                            <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    </div>
+                    <hr>
+                    <div class="blog_post_meta">
+                          <i class="fa fa-comment-o"></i>
+                          <%= review.comments.count %> コメント
+                          <% if logged_in? %>
+                            <% if can? :edit, review %>
+                              <%= link_to edit_review_path(review), :class => "btn btn-primary a-btn-slide-text" do %>
+                                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                  <span>編集</span>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                          <% if logged_in? %>
+                            <% if can? :destroy, review %>
+                              <%= link_to review, method: :delete, data: {confirm: "削除しますか？"}, :class => "btn btn-primary a-btn-slide-text" do %>
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                <span>削除</span>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                    </div>
+                    <time class="is-6" datetime="2016-1-1"><%= review.created_at.strftime "%l:%M %p - %_m %b %Y" %></time>
+                  </div>
+                </div>
+            
+                <div class="content", style="height: 40px;">
+                  <%= review.content %>
+                </div>
+              </div>
+            </div>
+        </div>
+    <% end %>
+</div>

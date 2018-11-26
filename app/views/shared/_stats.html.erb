@@ -1,0 +1,24 @@
+<% @user ||= current_user %>
+
+<div class="twPc-divStats">
+	<ul class="twPc-Arrange">
+		<li class="twPc-ArrangeSizeFit">
+			<a href="#">
+				<span class="twPc-StatLabel twPc-block">レビュー</span>
+				<span class="twPc-StatValue"><%= @user.reviews.count %></span>
+			</a>
+		</li>
+		<li class="twPc-ArrangeSizeFit">
+			<a href="#">
+				<span class="twPc-StatLabel twPc-block">フォロワー</span>
+				<span class="twPc-StatValue"><%= @user.following.count %></span>
+			</a>
+		</li>
+		<li class="twPc-ArrangeSizeFit">
+			<a href="#">
+				<span class="twPc-StatLabel twPc-block">フォロー</span>
+				<span class="twPc-StatValue"><%= @user.followers.count %></span>
+			</a>
+		</li>
+	</ul>
+</div>
