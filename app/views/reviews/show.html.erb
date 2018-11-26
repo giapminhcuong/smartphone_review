@@ -44,24 +44,8 @@
             </div>
           </div>
           
-          <div class="sidebar_title pull-left">関連レビュー</div>
-          <hr><hr><hr><hr>
-          <% Review.all.each do |review| %>
-            <% if review.id != @review.id && review.user_id == @review.user_id %>
-              <%= render :partial => "review", :object => review %>
-            <% end %>
-          <% end %>
-          <% @review.products.each do |product| %>
-            <% product.reviews.each do |review| %>
-              <% if review.id != @review.id %>
-                <%= render :partial => "review", :object => review %>
-              <% end %>
-            <% end %>
-          <% end %>
-          <hr><hr><hr><hr>
-          
-          <div class="sidebar_title pull-left"><%= @comments.length %>コメント</div>
-          <hr><hr><hr><hr>
+                    <div class="sidebar_title pull-left"><%= @comments.length %>コメント</div>
+          <hr>
           <% @comments.each do |comment| %>
               <div class="comment-container row">
                   <div class="col-sm-2 comment-imagebox ">
@@ -120,6 +104,23 @@
               </div>
             <% end %>
           <% end %>
+          
+          <div class="sidebar_title pull-left">関連レビュー</div>
+          <hr>
+          <% Review.all.each do |review| %>
+            <% if review.id != @review.id && review.user_id == @review.user_id %>
+              <%= render :partial => "review", :object => review %>
+            <% end %>
+          <% end %>
+          <% @review.products.each do |product| %>
+            <% product.reviews.each do |review| %>
+              <% if review.id != @review.id %>
+                <%= render :partial => "review", :object => review %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <hr>
+          
           </div>
         </div>
 
@@ -146,9 +147,11 @@
                       <h5 class="card-title">品名：<%= x.name %></h5>
                       <p class="card-text">メーカー：<%= x.maker.name %></p>
                       <p class="card-text">カテゴリー：<%= x.category %></p>
+                      <div>
                       <%= link_to x do %>
-                        <button type="button" class="btn btn-info">商品を見る</button>
+                        <button type="button" class="btn btn-info" style="align:center">商品を見る</button>
                       <% end %>
+                      </div>
                     </div>
                   </div>
                 <% end %>

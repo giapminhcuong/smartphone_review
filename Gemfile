@@ -16,6 +16,7 @@ gem 'rails_admin'
 gem 'carrierwave'
 gem 'cloudinary'
 gem "nested_form"
+gem 'simple_form'
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem 'jquery-rails'
@@ -23,6 +24,11 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3' 
+  # add the line below
+  gem 'rails-assets-chosen'
+end
 
 group :development, :test do
   gem 'byebug'

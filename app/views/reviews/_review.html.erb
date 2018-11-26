@@ -1,7 +1,7 @@
-<div class="card">
-  <div class="card-image-top" >
+<div class="card" style="width: 440px;" >
+  <div class="card-image-top" style="width: 440px; height: 150px;" >
     <% if review.banner.present? %>
-     <%= cl_image_tag(review.banner) %>
+     <%= cl_image_tag(review.banner, {:style => "width: 440px; height: 150px;"}) %>
    <% else %>
      <%= image_tag("no-banner.png") %><br><br>
    <% end %>
@@ -20,13 +20,15 @@
       <div class="media-content">
         <p class="title is-4"><%= link_to review.title, review %></p>
         <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
-        <% if review.products %>
-        <ul>
-          <% review.products.each do |x| %>
-            <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
+        <div style="height: 57px;">
+          <% if review.products %>
+            <ul>
+              <% review.products.each do |x| %>
+                <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
+              <% end %>
+            </ul>
           <% end %>
-        </ul>
-        <% end %>
+        </div>
         <hr>
         <div class="blog_post_meta">
               <i class="fa fa-comment-o"></i>
