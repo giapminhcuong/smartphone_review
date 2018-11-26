@@ -13,7 +13,7 @@
            </div>
            <br> <br> 
            <div class="col-12 mb-3">
-           <%= f.label :product_ids, "内容" %>
+           <%= f.label :product_ids, "商品" %>
            <%= f.input :product_ids, as: :select, :collection => Product.order(:name) , label_method: :name, input_html: {multiple: true}, label: false %>
            </div>
            <br> 

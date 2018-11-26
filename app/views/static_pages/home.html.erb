@@ -22,6 +22,7 @@
      <div class="container">
        <div class="row">
          <div class="col-lg-8">
+             <h2 class="title-widget-sidebar">最新レビュー</h2>
            <div class="row">
              <% @newest_reviews.each do| new| %>
               <div class="col-lg-6 col-md-6">
@@ -29,7 +30,7 @@
                 <img src="<%= new.banner %>" class="img-responsive" style = "height:200px">
                 <div class="content-title" style = "height:88px">
 				<div class="text-center">
-				<h3><a href="/reviews/<%=new.id%>"></a><%= new.title %></a></h3>
+				<h3><a href="/reviews/<%=new.id%>"><%= new.title %></a></h3>
 				</div>
 				</div>
 				<div class="content-footer">
@@ -56,7 +57,7 @@
 <!--           // RECENT POST===========-->
          <div class="col-lg-4" style =" width:360px">           
                <div class="widget-sidebar">
-                 <h2 class="title-widget-sidebar">// RECENT POST</h2>
+                 <h2 class="title-widget-sidebar">TOP レビュー</h2>
                    <div class="content-widget-sidebar">
                     <ul>
                        <% @top_reviews.each do| top| %>
@@ -75,16 +76,11 @@
 
             
               <!--=====================
-                    NEWSLATTER
+                    Home Coming
              ======================-->
 <div class="widget-sidebar">
- <h2 class="title-widget-sidebar">// NEWSLATTER</h2>
+ <h2 class="title-widget-sidebar">Home Coming</h2>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ut .</p>  
-<div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-      <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-    </div>
-    <button type="button" class="btn btn-warning">Warning</button>
              </div>  
                  
                  
@@ -95,15 +91,7 @@
 
 </section>
 
-      
-      
-      
-      
-      <% if !logged_in? %>
-      <div>
-        <%= link_to "サインアップ", signup_path, class: "btn btn-lg btn-primary" %>
-      </div>
-      <% end %>
+     
     </div>
 </body>
 	

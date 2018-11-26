@@ -12,5 +12,4 @@ class Product < ActiveRecord::Base
     
     validates :name, presence: true, uniqueness: true
     validates :category, presence: true
-    validates_presence_of :reviews
 end

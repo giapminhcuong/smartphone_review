@@ -1,3 +1,4 @@
+
 User.create!(name:  "honganh",
                email: "honganh.p256@gmail.com",
                password: "123456",
@@ -9,7 +10,6 @@ User.create!(name:  "toan",
                password: "123456",
                password_confirmation: "123456",
                is_admin: true)
-
 10.times do |n|
   name  = Faker::Name.name
   email = "user-#{n + 1}@gmail.com"
@@ -21,7 +21,6 @@ User.create!(name:  "toan",
                password: password,
                password_confirmation: password)
 end
-
 Maker.create!(name: "LG")
 Maker.create!(name: "Apple")
 Maker.create!(name: "Samsung")
