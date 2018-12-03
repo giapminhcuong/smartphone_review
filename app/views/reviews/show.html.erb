@@ -40,18 +40,23 @@
             </div>
 
             <div class="blog_post_text">
-              <p><%= strip_tags @review.content %></p>
+              <%= @review.content.html_safe %>
             </div>
           </div>
           
                     <div class="sidebar_title pull-left"><%= @comments.length %>コメント</div>
-          <hr>
+          <br>
           <% @comments.each do |comment| %>
-              <div class="comment-container row">
-                  <div class="col-sm-2 comment-imagebox ">
-                      <img style="avatar" src="<%= comment.user.avatar %>">
+              <div class="row">
+                <div class="col-12">
+                  <div class="col-sm-2 text-center">
+                    <% if comment.user.avatar.present? %>
+                      <%= cl_image_tag(comment.user.avatar, {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+                    <% else %>
+                      <%= image_tag("no_avatar.jpg", {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+                    <% end %>
                   </div>
-                  <div class="comment-box col-sm-10">
+                  <div class="comment-box col-sm-8">
                     <div class="comment-header">
                       <p><%= comment.user.name %></p>
                       <p style="font-weight: 400;font-size: 80%"><%= comment.created_at %></p>
@@ -81,6 +86,7 @@
                       </div>
                     </div>
                   </div>
+                </div>
               </div>
           <% end %>
             
@@ -105,28 +111,27 @@
             <% end %>
           <% end %>
           
-          <div class="sidebar_title pull-left">関連レビュー</div>
-          <hr>
-          <% Review.all.each do |review| %>
-            <% if review.id != @review.id && review.user_id == @review.user_id %>
-              <%= render :partial => "review", :object => review %>
-            <% end %>
-          <% end %>
-          <% @review.products.each do |product| %>
-            <% product.reviews.each do |review| %>
-              <% if review.id != @review.id %>
-                <%= render :partial => "review", :object => review %>
+          <div class="sidebar_title pull-left">関連レビュー</div><br>
+            <div class="" style="display: inline-block;">
+              <% Review.all.each do |review| %>
+                <% if review.id != @review.id && review.user_id == @review.user_id %>
+                  <%= render :partial => "review", :object => review %>
+                <% end %>
               <% end %>
-            <% end %>
-          <% end %>
-          <hr>
-          
+              <% @review.products.each do |product| %>
+                <% product.reviews.each do |review| %>
+                  <% if review.id != @review.id %>
+                    <%= render :partial => "review", :object => review %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
 
-      <div class="col-lg-4 sidebar_col">
+      <div class="col-lg-4 sidebar_col" >
         <div class="sidebar_title">筆者</div>
-        <div class="sidebar_archives" style="background-color: white;">
+        <div class="sidebar_archives" style="background-color: white;" style="text-align: center;">
           
           <% if @review.user.avatar.present? %>
            <%= cl_image_tag(@review.user.avatar, {:style => "display: block; margin-left: auto; margin-right: auto; border:0.5px solid black; height: 200px; width: 200px; border-radius:50%;" }) %>
@@ -145,7 +150,7 @@
             <ul>
               <% if @review.products %>
                 <% @review.products.each do |x| %>
-                  <div class="card" style="width: 40rem;">
+                  <div class="card" style="width: 40rem; margin: 0px; margin-bottom: 50px;">
                     <%= cl_image_tag(x.image, {:style => "height:200px; display: block; margin-left: auto; margin-right: auto;"}) %>
                     <div class="card-body">
                       <h5 class="card-title">品名：<%= x.name %></h5>

@@ -22,12 +22,24 @@
      <div class="container">
        <div class="row">
          <div class="col-lg-8">
+             <h2 class="title-widget-sidebar">フォローしたユーザーのレビュー</h2>
+           <div class="row">
+            <% if @follower_users.any? %>
+              <%= render partial: "review",  collection: @follower_users, as: "user" %>
+            <% end %>
+            </div>
+            <br><br><br><br>
+             
              <h2 class="title-widget-sidebar">最新レビュー</h2>
            <div class="row">
              <% @newest_reviews.each do| new| %>
               <div class="col-lg-6 col-md-6">
              <aside>
-                <img src="<%= new.banner %>" class="img-responsive" style = "height:200px">
+                <% if new.banner.present? %>
+                  <%= cl_image_tag(new.banner, {:style => "width: 100%; height: 150px;"}) %>
+                <% else %>
+                  <%= image_tag("no-banner.png", {:style => "width: 100%; height: 150px;"}) %>
+                <% end %>
                 <div class="content-title" style = "height:88px">
 				<div class="text-center">
 				<h3><a href="/reviews/<%=new.id%>"><%= new.title %></a></h3>
@@ -38,7 +50,6 @@
 				<span style="font-size: 16px;color: #fff;"><%= new.user.name %></span>
 				<span class="pull-right">
 				<a href="#" data-toggle="tooltip" data-placement="left" title="Comments"><i class="fa fa-comments" ></i><%= new.comments.count %></a>
-				<a href="#" data-toggle="tooltip" data-placement="right" title="Loved"><i class="fa fa-heart"></i><% if new.comments.count>0 %><%=new.comments.sum(:star)/new.comments.count%><%else%> 0<%end %></a>                  
 				</span>
                     <div class="user-ditels">
                     <div class="user-img"><img src="<%= new.user.avatar %>" class="img-responsive"></div>
@@ -53,6 +64,7 @@
                
             <%end%>
             </div>
+            
             </div>
 <!--           // RECENT POST===========-->
          <div class="col-lg-4" style =" width:360px">           
@@ -65,13 +77,15 @@
                         <div class="post-img">
                          <img src="<%= top.banner %>" class="img-responsive">
                          </div>
-                         <a href=/reviews/<%=top.id%>"><h5><%= top.title %></h5></a>
-                         <p><small><i class="fa fa-calendar" data-original-title="" title=""></i> <%= top.created_at %></small></p>
+                         <a href="/reviews/<%=top.id%>"><h5><%= top.title %></h5></a>
+                         <p><small><i class="fa fa-calendar" data-original-title="" title=""></i> <%= top.created_at.strftime "%l:%M %p - %_m %b %Y" %></small></p>
                         </li>
                         <hr>
                         <%end%>
                     </ul>
                    </div>
+                   
+                   <%= link_to "もっと見る", reviews_path(field: :top_cmt), :class => "pull-right" %>
                  </div>
 
             

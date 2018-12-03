@@ -55,7 +55,7 @@
     </div>
 
     <div class="content", style="height: 40px;">
-      <%= review.content %>
+      <%= strip_tags(review.content.truncate(27, separator: ' ')) %>
     </div>
   </div>
 </div>

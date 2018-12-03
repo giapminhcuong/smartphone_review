@@ -1,31 +1,40 @@
 <%= simple_form_for @review do |f| %>
   <div class="row">
    <h1>レビュー投稿</h1>
-      <div class="col-12 col-lg-8">
-           <div class="col-12 mb-3">
+      <div class="col-12">
+           <div>
              <%= f.label :title, "タイトル" %>
              <%= f.text_field :title, class:"form-control" %>
            </div>
            
-           <div class="col-12 mb-3">
+           <div>
              <%= f.label :banner, "バナー" %><br>
              <%= f.file_field :banner %>
            </div>
            <br> <br> 
-           <div class="col-12 mb-3">
+           <div>
            <%= f.label :product_ids, "商品" %>
            <%= f.input :product_ids, as: :select, :collection => Product.order(:name) , label_method: :name, input_html: {multiple: true}, label: false %>
            </div>
            <br> 
-           <div class="col-12 mb-3">
+           <div>
              <%= f.label :content, "内容" %>
-             <%= f.text_area :content, rows: 15, class: "form-control" %>
+             <%= f.text_area :content, class: "ckeditor" %>
            </div>
            
+           <%= f.submit "完了", :class => "btn btn-outline-success", :style => "width: 100px; margin: 10px;" %>
      </div>
-     <hr>
-  </div>
-  <div class="row">
-      <%= f.submit "完了", :class => "btn btn-outline-success", :style => "width: 100px; margin: 10px;" %>
   </div>
  <% end %>
+ 
+
+<script>
+    $(document).ready(function(){
+  if ($('textarea').length > 0) {
+    var data = $('.ckeditor');
+    $.each(data, function(i) {
+      CKEDITOR.replace(data[i].id)
+    });
+  }
+});
+</script>

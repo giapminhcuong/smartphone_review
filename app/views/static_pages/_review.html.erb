@@ -1,0 +1,31 @@
+<% user.reviews.each do |review| %>
+<div class="col-lg-6 col-md-6">
+<aside>
+<% if review.banner.present? %>
+ <%= cl_image_tag(review.banner, {:style => "width: 100%; height: 150px;"}) %>
+<% else %>
+ <%= image_tag("no-banner.png", {:style => "width: 100%; height: 150px;"}) %>
+<% end %>
+<div class="content-title" style = "height:88px">
+<div class="text-center">
+<h3><%= link_to review.title, review %></h3>
+</div>
+</div>
+<div class="content-footer">
+<img class="user-small-img" src="<%= review.user.avatar %>">
+<span style="font-size: 16px;color: #fff;"><%= review.user.name %></span>
+<span class="pull-right">
+<a href="#" data-toggle="tooltip" data-placement="left" title="Comments"><i class="fa fa-comments" ></i><%= review.comments.count %></a>
+</span>
+    <div class="user-ditels">
+    <div class="user-img"><img src="<%= review.user.avatar %>" class="img-responsive"></div>
+        <span class="user-full-ditels">
+        <h3><%= review.user.name %></h3>
+        <p><%= review.user.email %></p>
+        </span>
+    </div>
+</div>
+</aside>
+</div>
+<% end %>
+             

@@ -23,7 +23,7 @@
                   <div class="media-content">
                     <p class="title is-4"><%= link_to review.title, review %></p>
                     <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
-                    <div style="height: 57px;">
+                    <div style="height: 60px;">
                       <% if review.products %>
                         <ul>
                           <% review.products.each do |x| %>
@@ -58,7 +58,7 @@
                 </div>
             
                 <div class="content", style="height: 40px;">
-                  <%= review.content %>
+                  <%= strip_tags(review.content.truncate(27, separator: ' ')) %>
                 </div>
               </div>
             </div>
