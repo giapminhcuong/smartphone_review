@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   resources :reviews
   resources :comments
   get "/results", to: "results#index", as: 'results'
+  mount Ckeditor::Engine => '/ckeditor'
 end

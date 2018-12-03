@@ -45,7 +45,7 @@
            </li>
            <li>
              <span>作成時: </span>
-             <span><%= @user.created_at %></span>
+             <span><%= @user.created_at.strftime "%l:%M %p - %_m %b %Y" %></span>
            </li>
          </ul>
        </div>

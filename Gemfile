@@ -14,9 +14,11 @@ gem 'pg', '0.21'
 gem "pg_search"
 gem 'rails_admin'
 gem 'carrierwave'
+gem 'mini_magick'
 gem 'cloudinary'
 gem "nested_form"
 gem 'simple_form'
+gem 'ckeditor'
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem 'jquery-rails'

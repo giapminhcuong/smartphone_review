@@ -77,6 +77,8 @@ ul.twPc-Arrange {
     text-decoration: none;
 }
 .twPc-StatValue {
+    text-align: center; 
+    color: #82b440;
     display: block;
     font-size: 18px;
     font-weight: 500;
