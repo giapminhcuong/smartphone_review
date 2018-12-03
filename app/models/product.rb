@@ -12,4 +12,9 @@ class Product < ActiveRecord::Base
     
     validates :name, presence: true, uniqueness: true
     validates :category, presence: true
+    
+    scope :by_category, -> (category) { where category: category }
+    scope :price_asc, ->{order price: :asc}
+    scope :price_desc, ->{order price: :desc}
+    scope :order_by_time, ->{order created_at: :desc}
 end

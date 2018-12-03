@@ -19,6 +19,8 @@ class UsersController < ApplicationController
   def show
     @reviews = @user.reviews.all.order_by_time
     @comments = @user.comments.all.order_by_time
+    @following_users = @user.following.all
+    @follower_users = @user.followers.all
   end
   
   def edit; end

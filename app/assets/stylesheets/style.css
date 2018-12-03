@@ -132,9 +132,13 @@ header {
 
 .card-title {
   padding-left: 20px;
-  letter-spacing: -1px;
   font-weight: normal;
   color: gray;
+}
+
+.card-footer {
+    white-space: pre-wrap;
+    height: 50px;
 }
 .card-img-top {
     align-items: center;
@@ -257,3 +261,29 @@ header {
    .summary-table {
        margin-top: 30px;
    }
+
+.fs-ctelist {
+    display: block;
+    padding: 25px 0% 30px;
+    margin-bottom: 15px;
+    background: #fff;
+    text-align: center;
+}
+.fs-cteul {
+   display: flex;
+   flex-direction: row;
+   /* Below sets up your display method: flex-start|flex-end|space-between|space-around */
+   justify-content: flex-start; 
+   /* Below removes bullets and cleans white-space */
+   list-style: none;
+   padding: 0;
+   /* Bonus: forces no word-wrap */
+   white-space: nowrap;
+}
+
+#dropdownMenuButton {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}

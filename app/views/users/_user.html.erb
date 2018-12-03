@@ -1,0 +1,26 @@
+<div class="col-sm-6">
+    <div class="twPc-div" style="margin-bottom: 20px;">
+      <a class="twPc-bg twPc-block"></a>
+      <div>
+        <div class="twPc-button" style="position: static; visibility: visible; width: 338px; height: 33px; text-align:right;">
+          <%= render "follow_form" %>
+        </div>
+        
+        <a href="#" class="twPc-avatarLink">
+          <% if user.avatar.present? %>
+            <%= cl_image_tag(user.avatar, {:class => "twPc-avatarImg", :style => ""}) %>
+          <% else %>
+            <%= image_tag("no_avatar.jpg", {:class => "twPc-avatarImg", :style => ""}) %>
+          <% end %>
+        </a>
+        
+        <div class="twPc-divUser">
+        	<div class="twPc-divName">
+        		<%= link_to user.name, user %></a>
+        	</div>
+        </div>
+        
+        <%= render 'shared/stats' %>
+    	</div>
+    </div>
+</div>

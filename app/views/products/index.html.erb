@@ -4,27 +4,77 @@
   </div>
   <div class="container">
     <h1>商品</h1>
-      <div class="row" style="text-align: right;">
-        <%= paginate @products, theme: "twitter-bootstrap-4" %>
+    
+    <div class="fs-ctelist">
+      <ul class="fs-cteul">
+        <li style="margin-left: 75px;">
+            <%= link_to products_path(category: "0-1500円") do %>
+                <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267075950000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267075950000_200.jpg" alt="" style="display: inline;"></span>
+                <p style="text-align: center;">0-1500円</p>
+            <% end %>
+        </li>
+        <li>
+            <%= link_to products_path(category: "1500-10000円") do %>
+                <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267646710000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267646710000_200.jpg" alt="" style="display: inline;"></span>
+                <p style="text-align: center;">1500-10000円</p>
+            <% end %>
+        </li>
+        <li>
+            <%= link_to products_path(category: "10000-50000円") do %>
+                <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267954174000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267954174000_200.jpg" alt="" style="display: inline;"></span>
+                <p style="text-align: center;">10000-50000円</p>
+            <% end %>
+        </li>
+        <li>
+            <%= link_to products_path(category: "50000-100000円") do %>
+                <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287268647066000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287268647066000_200.jpg" alt="" style="display: inline;"></span>
+                <p style="text-align: center;">50000-100000円</p>
+            <% end %>
+        </li>
+        <li>
+            <%= link_to products_path(category: "100000円以上") do %>
+                <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/5/15/636304622649228315_10-15.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/5/15/636304622649228315_10-15.jpg" alt="" style="display: inline;"></span>
+                <p style="text-align: center;">100000円以上</p>
+            <% end %>
+        </li>
+      </ul>
+      </div>
+        
+      <div class="row">
+        <div class="dropdown col-sm-6">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <strong style="padding-left: 20px;">並べ替え </strong><span class="glyphicon glyphicon-chevron-down" style="padding-left: 5px;"></span>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to "価格の安い順番", products_path(field: :yasui), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+            <%= link_to "価格の高い順番", products_path(field: :takai), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+            <%= link_to "最新商品", products_path(field: :time), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-6" style="text-align: right;">
+          <%= paginate @products, theme: "twitter-bootstrap-4", :style => "weight: 166px;" %>
+        </div>
       </div>
     <div class="row">
       
       <% @products.each do |product| %>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-          <%= cl_image_tag(product.image, {:style => "height:200px; display: block; margin-left: auto; margin-right: auto;"}) %>
-          <div class="card-body">
-            <h4 class="card-title" style="text-align: center; height: 30px;">
-              <%= link_to product.name, product %>
-            </h4>
-          </div>
-          <hr>
-          <div class="card-footer">
-            <h5 class="card-title"><strong><%= product.category %></strong></h5>
-            <h5 class="card-title"><strong><%= product.maker.name %></strong></h5>
+      <% if product.state == true %>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="card">
+            <%= cl_image_tag(product.image, {:style => "height:200px; display: block; margin-left: auto; margin-right: auto;"}) %>
+            <div class="card-body">
+              <h4 class="card-title" style="text-align: center; height: 30px;">
+                <%= link_to product.name, product %>
+              </h4>
+            </div>
+            <div class="card-footer">
+              <h4 style="width: 50%; font-size: 150%; color: red; padding-left: 20px; padding-top: 10px;">￥<%= product.price %></h4>
+              <span class="label label-success" style="font-size: 125%; width: 50%; padding-top: 25px;"><%= product.maker.name %></span>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
       <% end %>
       
   </div>

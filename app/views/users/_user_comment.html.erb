@@ -1,0 +1,41 @@
+<div class="row" style="margin: 10px 30px;">
+<% @comments.each do |comment| %>
+      <div class="col-md-2 text-center">
+        <% if @user.avatar.present? %>
+          <%= cl_image_tag(@user.avatar, {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+        <% else %>
+          <%= image_tag("no_avatar.jpg", {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+        <% end %>
+      </div>
+      <div class="comment-box col-sm-10">
+        <div class="comment-header">
+          <p><%= link_to comment.review.title, comment.review %>　にコメントしました。</p>
+          <p style="font-weight: 400;font-size: 80%"><%= comment.created_at %></p>
+        </div>
+        <!--<hr width="10%" style="border-color: #000">-->
+        <div class="comment-body">
+          <p><%= comment.content %></p>
+          <% comment.star.to_i.times do  %>
+            <span class="glyphicon glyphicon-star"></span>
+          <% end %>
+          <% comment.blank_stars.times do %>
+            <span class="glyphicon glyphicon-star-empty"></span>
+          <% end %>
+          <div style="text-align: right">
+          <% if logged_in? %>
+            <% if can? :edit, comment %>
+              <%= link_to "編集", comment_path(comment), class: "btn btn-warning", :style => "margin-top: 0px; border-radius: 5px;" %>
+            <% end %>
+          <% end %>
+        
+          <% if logged_in? %>
+            <% if can? :destroy, comment %>
+              <%= link_to "削除", comment, method: :delete, class: "btn btn-danger",
+                data: {confirm: "削除しますか？"} %>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+<% end %>
+</div>

@@ -75,6 +75,9 @@ RailsAdmin.config do |config|
       field :name do
         column_width 50
       end
+      field :price do
+        column_width 50
+      end
       field :category do
         column_width 50
       end

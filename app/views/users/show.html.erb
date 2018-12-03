@@ -1,145 +1,115 @@
 <div class="blog">
-  <div class="container">
+  <div class="container main-secction" style="width: 1800px;">
     <div class="row">
-      <div class="cart-summary" style="height:310px;">
-        <h1>ユーザープロフィール</h1>
-        <div class="col-md-4">
-         <% if @user.avatar.present? %>
-           <%= cl_image_tag(@user.avatar, {:style => "display: block; margin-left: auto; margin-right: auto; border:0.5px solid black; height: 150px; width: 150px; border-radius:50%;" }) %>
-         <% else %>
-           <%= image_tag "no_avatar.jpg", :class => "avatar150" %>
-         <% end %>
+        <div class="col-md-12 col-sm-12 col-xs-12 image-section">
+            <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg">
         </div>
-        <div class="col-md-6">
-            <h3>ニックネーム: <%= @user.name %></h3>
-            <h3>メールアドレス: <%= @user.email %></h3>
+        <div class="row user-left-part">
+            <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                <div class="row ">
+                    <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                        <% if @user.avatar.present? %>
+                          <%= cl_image_tag(@user.avatar, {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+                        <% else %>
+                          <%= image_tag("no_avatar.jpg", {:class => "rounded-circle", :style => "border-radius: 50%;"}) %>
+                        <% end %>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
+                      <div style="margin-top: 70px;">
+                        <%= render "follow_form" if logged_in? %>
+                      </div>
+                    </div>
+                    <div class="row user-detail-row">
+                        <div class="col-md-12 col-sm-12">
+                          <%= render 'shared/stats' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <% if logged_in? %>
-              <% if can? :edit, @user %>
-                <button type="button" class="btn btn-primary" style="margin-top:50px; float: right;">
-                <%= link_to "編集", edit_user_path(@user) %>
-                </button>
-              <% end %>
-            <% end %>
+            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                <div class="row profile-right-section-row">
+                    <div class="col-md-12 profile-header">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                <h1><%= @user.name %></h1>
+                            </div>
+                            <% if logged_in? %>
+                              <% if can? :edit, @user %>
+                                <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
+                                  <%= link_to edit_user_path(@user) do %>
+                                    <button type="button" class="btn btn-primary btn-block">編集</button>
+                                  <% end %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <div class="row">
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li class="nav-item">
+                            <a class="tablinks" onclick="openCity(event, 'reviews')"><i class="fas fa-user-circle"></i> レビュー</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="tablinks" onclick="openCity(event, 'comments')"><i class="fas fa-info-circle"></i>コメント</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="tablinks" onclick="openCity(event, 'follower')"><i class="fas fa-info-circle"></i>フォロー</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="tablinks" onclick="openCity(event, 'following')"><i class="fas fa-info-circle"></i>フォロワー</a>
+                          </li>
+                        </ul>
+                        
+                        <div class="tab-content">
+                          <div class="tabcontent" id="reviews">
+                            <% if @reviews.any? %>
+                              <%= render "user_review" %>
+                            <% end %>
+                          </div>
+                          
+                          <div class="tabcontent" id="comments">
+                            <% if @comments.any? %>
+                              <%= render "user_comment" %>
+                            <% end %>
+                          </div>
+                          
+                          <div class="tabcontent" id="follower">
+                            <% if @follower_users.any? %>
+                              <%= render partial: "user",  collection: @follower_users, as: "user" %>
+                            <% end %>
+                          </div>
+                          
+                          <div class="tabcontent" id="following">
+                            <% if @following_users.any? %>
+                              <%= render partial: "user",  collection: @following_users, as: "user" %>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                </div>
+              </div>
         </div>
-      </div>
     </div>
-    
-    <hr><hr><hr>
-    
-    <% if @reviews.any? %>
-      <div class="row">
-        <h3>ユーザーのレビュー</h3>
-        <% @reviews.each do |review| %>
-        <div class="col-lg-6 col-md-6">
-        <div class="card" style="width: 441px; height: 480px;">
-          <div class="card-image-top" >
-            <% if review.banner.present? %>
-             <%= cl_image_tag(review.banner) %>
-           <% else %>
-             <%= image_tag("no-banner.png") %><br><br>
-           <% end %>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="avatar48">
-                  <% if review.user.avatar.present? %>
-                   <%= cl_image_tag(review.user.avatar) %>
-                 <% else %>
-                   <%= image_tag("no_avatar.jpg") %>
-                 <% end %>
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-4"><%= link_to review.title, review %></p>
-                <p class="subtitle is-6">@<%= link_to review.user.name, review.user %></p>
-                <% if review.products %>
-                <ul>
-                  <% review.products.each do |x| %>
-                    <li class="title is-5" style="text-align: right;">品名：<%= x.name %></li>
-                  <% end %>
-                </ul>
-                <% end %>
-                <hr>
-                <div class="blog_post_meta">
-                      <i class="fa fa-comment-o"></i>
-                      <%= review.comments.count %> コメント
-                      <% if logged_in? %>
-                        <% if can? :edit, review %>
-                          <%= link_to edit_review_path(review), :class => "btn btn-primary a-btn-slide-text" do %>
-                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                              <span>編集</span>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                      <% if logged_in? %>
-                        <% if can? :destroy, review %>
-                          <%= link_to review, method: :delete, data: {confirm: "削除しますか？"}, :class => "btn btn-primary a-btn-slide-text" do %>
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            <span>削除</span>
-                          <% end %>
-                        <% end %>
-                      <% end %>
-                </div>
-                <time class="is-6" datetime="2016-1-1"><%= review.created_at.strftime "%l:%M %p - %_m %b %Y" %></time>
-              </div>
-            </div>
-        
-            <div class="content">
-              <%= review.content %>
-            </div>
-          </div>
-        </div>
-        </div>
-      <% end %>
-      </div>
-    <% end %>
-    
-    <hr><hr><hr>
-    
-    <% if @comments.any? %>
-      <div class="row">
-        <h3>ユーザーのコメント</h3>
-        <% @comments.each do |comment| %>
-            <div class="comment-container row">
-              <div class="col-sm-2 comment-imagebox ">
-                  <img class="avatar150" src="<%= comment.user.avatar %>">
-              </div>
-              <div class="comment-box col-sm-10">
-                <div class="comment-header">
-                  <p><%= link_to comment.review.title, comment.review %>　にコメントしました。</p>
-                  <p style="font-weight: 400;font-size: 80%"><%= comment.created_at %></p>
-                </div>
-                <!--<hr width="10%" style="border-color: #000">-->
-                <div class="comment-body">
-                  <p><%= comment.content %></p>
-                  <% comment.star.to_i.times do  %>
-                    <span class="glyphicon glyphicon-star"></span>
-                  <% end %>
-                  <% comment.blank_stars.times do %>
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                  <% end %>
-                  <div style="text-align: right">
-                  <% if logged_in? %>
-                    <% if can? :edit, comment %>
-                      <%= link_to "編集", comment_path(comment), remote: true, class: "btn btn-warning"%>
-                    <% end %>
-                  <% end %>
-                
-                  <% if logged_in? %>
-                    <% if can? :destroy, comment %>
-                      <%= link_to "削除", comment, method: :delete, class: "btn btn-danger",
-                        data: {confirm: "削除しますか？"} %>
-                    <% end %>
-                  <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <% end %>
-      </div>
-    <% end %>
-    
   </div>
 </div>
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
