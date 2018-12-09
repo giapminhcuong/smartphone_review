@@ -1,8 +1,8 @@
 class Review < ActiveRecord::Base
     include PgSearch
-    multisearchable :against => [:title, :content]
+    pg_search_scope :review_search, :against => [:title, :content]
     
-    mount_uploader :banner, BannerUploader
+    mount_uploader :banner_path, BannerUploader
     
     belongs_to :user, required: true
     
@@ -18,5 +18,12 @@ class Review < ActiveRecord::Base
     
     scope :order_by_time, ->{order created_at: :desc}
     scope :order_by_cmt, ->{order cmt_count: :desc}
+
+    private
+    def update_path
+        if (!self.banner_path.blank?)
+            self.update_column('image',self.banner_path.url)
+        end
+    end
     
 end

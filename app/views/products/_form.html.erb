@@ -6,7 +6,7 @@
      <%= f.text_field :category, class: "form-control" %>
    
      <%= f.label :image, "写真" %><br>
-     <%= f.file_field :image %>
+     <%= f.file_field :image_path %>
    
      <%= f.label :maker_id, "メーカー" %>
      <%= f.select :maker_id, Maker.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>

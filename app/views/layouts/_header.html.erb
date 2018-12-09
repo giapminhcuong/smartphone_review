@@ -10,8 +10,13 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
 
             <ul class="nav navbar-nav navbar-right navbar-menu">
+            <% if params[:query] ==nil%>
               <li><%= link_to "商品", products_path %></li>
               <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path %></li>
+            <%else%>
+              <li><%= link_to "商品", products_path(query: params[:query]) %></li>
+              <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path(query: params[:query]) %></li>
+            <%end%>
               
               <% if logged_in? %>
                 <% if current_user.is_admin? %>

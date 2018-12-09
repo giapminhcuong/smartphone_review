@@ -140,7 +140,7 @@
          <% end %>
          <h3 style="text-align: center;"><%= link_to @review.user.name, @review.user %></h3>
          <div style="margin-top: 20px;">
-         <%= render "shared/stats" %>
+         <%= render "shared/stats", :@user => @review.user %>
          </div>
         </div>
 

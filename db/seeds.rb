@@ -28,49 +28,34 @@ Maker.create!(name: "Xiaomi")
 Maker.create!(name: "HTC")
 Maker.create!(name: "Sony")
 Maker.create!(name: "Huawei")
+Maker.create!(name: "Oppo")
 
-maker = Maker.find(1)
-maker.products.create!(name: "LG V30+ LGH930DS Aurora Black", image: "", category: "LG V")
-maker = Maker.find(2)
-maker.products.create!(name: "Iphone 6 32G", image: "", category: "Iphone")
-maker.products.create!(name: "Iphone X 128G White", image: "", category: "Iphone")
-maker = Maker.find(3)
-maker.products.create!(name: "Samsung Galaxy S9", image: "", category: "Galaxy S")
-maker.products.create!(name: "Samsung Galaxy A7 2017", image: "", category: "Galaxy A")
-maker.products.create!(name: "Samsung Galaxy J6", image: "", category: "Galaxy J")
-maker.products.create!(name: "Samsung Galaxy Note 9", image: "", category: "Galaxy Note")
-maker = Maker.find(4)
-maker.products.create!(name: "Xiaomi Mi 5", image: "", category: "Mi")
-maker.products.create!(name: "Xiaomi Redmi Note 5", image: "", category: "Redmi Note")
-maker.products.create!(name: "Xiaomi Mimix 2", image: "", category: "Mimix")
-
-
-
-
+CSV.foreach(File.join(Rails.root, 'db', 'smartphone.csv'), :headers => true,:encoding => 'utf-8',skip_blanks: true) do |row|  
+  maker = Maker.where(:name => row[0]).first()
+  product = maker.products.create(name: 'test', description: Faker::Lorem.paragraphs, state: true)
+  product.update(row.to_hash.slice!('maker'))
+end
+banners = ['https://www.lg.com/au/images/MC/features/lg-smartphones-banner_V30_G6_Q6_D.jpg','http://dienthoaidailoangiare.com/wp-content/uploads/2016/04/smartphone-banner_updated-1.jpg', 'https://techprolonged.com/wp-content/uploads/2015/10/inewphone-banner.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmN1k7EbzDz9lnst2tkwnoYL6nSuDQkId1lS9-oB15NakmInMQ']
 users = User.order(:created_at).take(6)
-3.times do
-  title = Faker::Lorem.sentence(1)
-  banner = ""
-  content = Faker::Lorem.paragraph
+5.times do
+  title = Faker::Lorem.sentence()
+  banner = banners.sample
+  content = Faker::Lorem.paragraphs
   users.each {|user| user.reviews.create!(title: title, banner: banner, content: content)}
 end
 
-ProductReview.create!(product_id: Product.find(4).id, review_id: Review.find(2).id)
-ProductReview.create!(product_id: Product.find(5).id, review_id: Review.find(1).id)
-ProductReview.create!(product_id: Product.find(6).id, review_id: Review.find(11).id)
-ProductReview.create!(product_id: Product.find(7).id, review_id: Review.find(15).id)
-ProductReview.create!(product_id: Product.find(8).id, review_id: Review.find(16).id)
-ProductReview.create!(product_id: Product.find(10).id, review_id: Review.find(17).id)
-ProductReview.create!(product_id: Product.find(1).id, review_id: Review.find(18).id)
-ProductReview.create!(product_id: Product.find(2).id, review_id: Review.find(12).id)
-ProductReview.create!(product_id: Product.find(3).id, review_id: Review.find(17).id)
-ProductReview.create!(product_id: Product.find(4).id, review_id: Review.find(4).id)
-ProductReview.create!(product_id: Product.find(5).id, review_id: Review.find(5).id)
-ProductReview.create!(product_id: Product.find(6).id, review_id: Review.find(6).id)
-ProductReview.create!(product_id: Product.find(7).id, review_id: Review.find(10).id)
-ProductReview.create!(product_id: Product.find(8).id, review_id: Review.find(10).id)
-ProductReview.create!(product_id: Product.find(9).id, review_id: Review.find(1).id)
-ProductReview.create!(product_id: Product.find(10).id, review_id: Review.find(9).id)
-ProductReview.create!(product_id: Product.find(6).id, review_id: Review.find(2).id)
-ProductReview.create!(product_id: Product.find(8).id, review_id: Review.find(5).id)
-ProductReview.create!(product_id: Product.find(9).id, review_id: Review.find(8).id)
+Review.all.each do |review|
+  i = rand(1..3)
+  for j in [1..i] do 
+    ProductReview.create!(product_id: Product.all.sample.id, review_id: review.id)
+    end
+end 
+
+100.times do
+  Comment.create!(
+    content: Faker::Lorem.paragraph,
+    star: rand(0..5),
+    user_id: User.all.sample.id,
+    review_id: Review.all.sample.id
+  )
+end

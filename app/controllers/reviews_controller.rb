@@ -7,6 +7,9 @@ class ReviewsController < ApplicationController
                 else
                     Review.order_by_time.page(params.permit![:page]).per 10
                 end
+        if params[:query].present?
+                @reviews = @reviews.review_search(params[:query])
+         end
     end
     
     def new
