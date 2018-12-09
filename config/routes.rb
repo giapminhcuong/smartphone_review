@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  get '/comparisons', to: 'product_comparisons#show'
+  get '/products_json', to: 'products#index_json'
+  post '/compare', to: 'product_comparisons#compare'
   resources :users do
     member do
       get :following, :followers

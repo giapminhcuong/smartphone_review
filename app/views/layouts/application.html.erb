@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>スマホホーム</title>
-    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" %>
-    <%= render "layouts/rails_default" %>
-  </head>
 
-  <body>
-    <div id="modal-window" class="modal hide fade" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        </div>
+<head>
+  <title>スマホホーム</title>
+  <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" %>
+  <%= render "layouts/rails_default" %>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+</head>
+
+<body>
+  <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
       </div>
     </div>
-    
-    <%= render "layouts/header" %>
-    <div class="container-fluid">
-      <div id="flash">
+  </div>
+
+  <%= render "layouts/header" %>
+  <div class="container-fluid">
+    <div id="flash">
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
-      </div>
-      <%= yield %>
     </div>
-    </div>
-    <%= render "layouts/footer" %>
-  </body>
+    <%= yield %>
+  </div>
+  </div>
+  <%= render "layouts/footer" %>
+</body>
+
 </html>
 
 <script>
-  $('document').ready(function() {
-  setTimeout(function() {
-    $('#flash').slideUp();
-  }, 3000);
-});
+  $('document').ready(function () {
+    setTimeout(function () {
+      $('#flash').slideUp();
+    }, 3000);
+  });
 </script>
 
 <script>

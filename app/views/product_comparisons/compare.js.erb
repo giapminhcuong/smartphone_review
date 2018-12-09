@@ -1,0 +1,238 @@
+var body_detail_comparison = $('#body-detail-comparison');
+body_detail_comparison.html(
+    `
+    <h1>Detail Comparison</h1>
+    <table class="table">
+    <tr>
+        <th scope="col">Spec</th>
+        <% @products.each do |product| %>
+            <th><%= product.name %></th>
+        <% end %>
+    </tr>
+    
+    <tbody>
+        <tr>
+            <th scope="row">ID</th>
+            <% @products.each do |product| %>
+                <td><%= product.id %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Maker</th>
+            <% @products.each do |product| %>
+                <td><%= product.maker.name %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Catogory</th>
+            <% @products.each do |product| %>
+                <td><%= product.category %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Price (円)</th>
+            <% @products.each do |product| %>
+                <td><%= product.price %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Screen Type (pixel*pixel)</th>
+            <% @products.each do |product| %>
+                <td><%= product.screen_type %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Resolution</th>
+            <% @products.each do |product| %>
+                <td><%= product.resolution %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Screen Size</th>
+            <% @products.each do |product| %>
+                <td><%= product.screen_size %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Rear Camera</th>
+            <% @products.each do |product| %>
+                <td><%= product.rear_camera %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Front Camera</th>
+            <% @products.each do |product| %>
+                <td><%= product.front_camera %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Rear Flash</th>
+            <% @products.each do |product| %>
+                <td><%= product.rear_flash %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">OS</th>
+            <% @products.each do |product| %>
+                <td><%= product.os %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Chipset</th>
+            <% @products.each do |product| %>
+                <td><%= product.chipset %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">CPU Speed</th>
+            <% @products.each do |product| %>
+                <td><%= product.cpu_speed %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">GPU</th>
+            <% @products.each do |product| %>
+                <td><%= product.gpu %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">RAM</th>
+            <% @products.each do |product| %>
+                <td><%= product.ram %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">ROM</th>
+            <% @products.each do |product| %>
+                <td><%= product.rom %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Expandable Storage</th>
+            <% @products.each do |product| %>
+                <td><%= product.expandable_storage %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Conectivity Type</th>
+            <% @products.each do |product| %>
+                <td><%= product.conectivity_type %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Wifi</th>
+            <% @products.each do |product| %>
+                <td><%= product.wifi %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Bluetooth</th>
+            <% @products.each do |product| %>
+                <td><%= product.bluetooth %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Port</th>
+            <% @products.each do |product| %>
+                <td><%= product.port %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Jack</th>
+            <% @products.each do |product| %>
+                <td><%= product.jack %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Other Connectivity</th>
+            <% @products.each do |product| %>
+                <td><%= product.other_connectivity %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Material</th>
+            <% @products.each do |product| %>
+                <td><%= product.material %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Dimension</th>
+            <% @products.each do |product| %>
+                <td><%= product.dimension %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Weight</th>
+            <% @products.each do |product| %>
+                <td><%= product.weight %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Pin capability</th>
+            <% @products.each do |product| %>
+                <td><%= product.pin_capability %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Pin Type</th>
+            <% @products.each do |product| %>
+                <td><%= product.pin_type %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Security</th>
+            <% @products.each do |product| %>
+                <td><%= product.security %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Other features</th>
+            <% @products.each do |product| %>
+                <td><%= product.other_feature %></td>
+            <% end %>
+        </tr>
+
+        <tr>
+            <th scope="row">Release Date</th>
+            <% @products.each do |product| %>
+                <td><%= product.release_date %></td>
+            <% end %>
+        </tr>
+  </tbody>
+
+    </table>
+    
+
+
+    
+    `
+);
