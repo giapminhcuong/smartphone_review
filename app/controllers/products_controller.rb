@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   load_and_authorize_resource param_method: :product_params
+  skip_authorize_resource :only => :index_json
   
   def index 
       @products = if params[:category].present?
@@ -57,8 +58,24 @@ class ProductsController < ApplicationController
         redirect_to request.referrer || products_url
     end
     
+  def index_json
+    term = params[:term]
+    @products = Product.all.where("name LIKE :prefix", prefix: "%#{term}%")
+    if term
+      render json: {"results" => data_for_select_tag(@products) }
+    else
+      render json: {"results" => []}
+    end
+  end
+
   private
   def product_params
     params.require(:product).permit :name, :category, :image, :maker_id
+  end
+
+  def data_for_select_tag products
+    products.collect do |product|
+      { "id" => product.id, "text" => product.name }
+    end
   end
 end
