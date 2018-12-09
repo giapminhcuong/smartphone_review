@@ -1,8 +1,8 @@
 class Product < ActiveRecord::Base
     include PgSearch
-    multisearchable :against => :name
+    pg_search_scope :custom_search, :against => :name
     
-    mount_uploader :image, ImageUploader
+    mount_uploader :image_path, ImageUploader
     
     belongs_to :maker, required: true
     accepts_nested_attributes_for :maker
@@ -17,4 +17,11 @@ class Product < ActiveRecord::Base
     scope :price_asc, ->{order price: :asc}
     scope :price_desc, ->{order price: :desc}
     scope :order_by_time, ->{order created_at: :desc}
+
+    private
+    def update_path
+        if (!self.image_path.blank?)
+            self.update_column('image',self.image_path.url)
+        end
+    end
 end

@@ -1,9 +1,7 @@
 default: &default
   adapter: postgresql
-  pool: 5
   username: postgres
-  password: 12345678
-  template: template0
+  password: 1
   host: localhost
 
 development:

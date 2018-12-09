@@ -8,31 +8,31 @@
     <div class="fs-ctelist">
       <ul class="fs-cteul">
         <li style="margin-left: 75px;">
-            <%= link_to products_path(category: "0-1500円") do %>
+            <%= link_to products_path(category: "0-1500円",query: params[:query]) do %>
                 <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267075950000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267075950000_200.jpg" alt="" style="display: inline;"></span>
                 <p style="text-align: center;">0-1500円</p>
             <% end %>
         </li>
         <li>
-            <%= link_to products_path(category: "1500-10000円") do %>
+            <%= link_to products_path(category: "1500-10000円",query: params[:query]) do %>
                 <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267646710000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267646710000_200.jpg" alt="" style="display: inline;"></span>
                 <p style="text-align: center;">1500-10000円</p>
             <% end %>
         </li>
         <li>
-            <%= link_to products_path(category: "10000-50000円") do %>
+            <%= link_to products_path(category: "10000-50000円",query: params[:query]) do %>
                 <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267954174000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287267954174000_200.jpg" alt="" style="display: inline;"></span>
                 <p style="text-align: center;">10000-50000円</p>
             <% end %>
         </li>
         <li>
-            <%= link_to products_path(category: "50000-100000円") do %>
+            <%= link_to products_path(category: "50000-100000円",query: params[:query]) do %>
                 <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287268647066000_200.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/4/25/636287268647066000_200.jpg" alt="" style="display: inline;"></span>
                 <p style="text-align: center;">50000-100000円</p>
             <% end %>
         </li>
         <li>
-            <%= link_to products_path(category: "100000円以上") do %>
+            <%= link_to products_path(category: "100000円以上",query: params[:query]) do %>
                 <span><img class="lazy" src="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/5/15/636304622649228315_10-15.jpg" data-original="//cdn.fptshop.com.vn/Uploads/Thumbs/2017/5/15/636304622649228315_10-15.jpg" alt="" style="display: inline;"></span>
                 <p style="text-align: center;">100000円以上</p>
             <% end %>
@@ -46,9 +46,9 @@
             <strong style="padding-left: 20px;">並べ替え </strong><span class="glyphicon glyphicon-chevron-down" style="padding-left: 5px;"></span>
           </button>
           <div class="dropdown-menu">
-            <%= link_to "価格の安い順番", products_path(field: :yasui), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
-            <%= link_to "価格の高い順番", products_path(field: :takai), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
-            <%= link_to "最新商品", products_path(field: :time), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+            <%= link_to "価格の安い順番", products_path(field: :yasui,query: params[:query]), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+            <%= link_to "価格の高い順番", products_path(field: :takai,query: params[:query]), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
+            <%= link_to "最新商品", products_path(field: :time,query: params[:query]), :class => "dropdown-item", :style => "height: 30px; font-size: 120%;" %>
           </div>
         </div>
         

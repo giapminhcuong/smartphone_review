@@ -5,7 +5,7 @@
 <div class="container">
   <h1>レビュー</h1>
   <div class="row" style="text-align: right;">
-    <p>並び替え: <%= link_to "日付け", reviews_path %> | <%= link_to "トップコメント",  reviews_path(field: :top_cmt) %></p>
+    <p>並び替え: <%= link_to "日付け", reviews_path %> | <%= link_to "トップコメント",  reviews_path(field: :top_cmt, query: params[:query]) %></p>
     
     <%= paginate @reviews, theme: "twitter-bootstrap-4" %>
     
