@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'product_comparisons/show'
   root to: 'static_pages#home'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get "/signup", to: "users#new"
