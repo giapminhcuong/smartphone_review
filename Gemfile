@@ -12,7 +12,7 @@ gem 'rails-ujs'
 gem 'kaminari', github: "amatsuda/kaminari", branch: '0-17-stable'
 gem 'cancancan', '~> 1.10'
 gem 'hirb', '~> 0.2.4'
-gem 'pg', '~> 1.1', '>= 1.1.3'
+gem 'pg'
 gem "pg_search"
 gem 'rails_admin'
 gem 'carrierwave'

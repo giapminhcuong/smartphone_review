@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-
 <header>
       <nav class="navbar ">
-        <div style="width: 100%; padding: 0 35px">
+        <div style="width: 100%; padding: 0 35px;height: 127px;">
           <div class="navbar-custom">
             <%= link_to "スマホホーム", root_path, id: "logo" %>
           </div>
@@ -11,11 +9,11 @@
 
             <ul class="nav navbar-nav navbar-right navbar-menu">
             <% if params[:query] ==nil%>
-              <li><%= link_to "商品", products_path %></li>
-              <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path %></li>
+              <li> <h2><%= link_to "商品", products_path %></h2></li>
+              <li style="margin-right: 200px;"><h2><%= link_to "レビュー", reviews_path %></h2></li>
             <%else%>
-              <li><%= link_to "商品", products_path(query: params[:query]) %></li>
-              <li style="margin-right: 200px;"><%= link_to "レビュー", reviews_path(query: params[:query]) %></li>
+              <li> <h2><%= link_to "商品", products_path(query: params[:query]) %></h2></li>
+              <li style="margin-right: 200px;"><h2><%= link_to "レビュー", reviews_path(query: params[:query]) %></h2></li>
             <%end%>
               
               <% if logged_in? %>
@@ -39,27 +37,29 @@
                     aria-haspopup="true" 
                     aria-expanded="false"
                   >
-                    <%= current_user.name %> <span class="caret"></span>
+                    <h2><%= current_user.name %> </h2><span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
                     <% if current_user.is_admin? %>
-                      <li><%= link_to "管理ダッシュボード", rails_admin_path %></li>
+                      <li style="font-size: 21px;"><%= link_to "管理ダッシュボード", rails_admin_path %></li>
                       <li class="divider"></li>
                     <% end %>
-                    <li><%= link_to "プロフィール", current_user %></li>
-                    <li><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
+                    <li style="font-size: 21px;"><%= link_to "プロフィール", current_user %></li>
+                    <li style="font-size: 21px;"><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
                     <li class="divider"></li>
-                    <li><%= link_to "レビュー投稿", new_review_path %></li>
-                    <li><%= link_to "商品投稿", new_product_path %></li>
+                    <li style="font-size: 21px;"><%= link_to "レビュー投稿", new_review_path %></li>
+                    <li style="font-size: 21px;"><%= link_to "商品投稿", new_product_path %></li>
                     <li class="divider"></li>
-                    <li>
+                    <li style="font-size: 21px;">
                         <%= link_to "サインアウト", logout_path, method: :delete %>
                     </li>
                   </ul>
                 </li>
               <% else %>
-                <li style="display: flex;"><span class="glyphicon glyphicon-log-in" style="height: 50%;top: 33%;"></span><%= link_to "サインイン", login_path, {:style => "padding-left: 5px"} %></li>
-                <li style="display: flex;"><span class="glyphicon glyphicon-pencil" style="height: 50%;top: 33%;"></span><%= link_to "サインアップ", signup_path, {:style => "padding-left: 5px"} %></li>
+                <li style="display: flex;"><span class="glyphicon glyphicon-log-in" style="height: 50%;top: 33%;"></span>
+                 <h2> <%= link_to "サインイン", login_path, {:style => "padding-left: 5px"} %> </h2></li>
+                <li style="display: flex;"><span class="glyphicon glyphicon-pencil" style="height: 50%;top: 33%;"></span>
+                  <h2><%= link_to "サインアップ", signup_path, {:style => "padding-left: 5px"} %></h2></li>
               <% end %>
             </ul>
             <div class="wrap">
@@ -75,3 +75,12 @@
         <!-- /.container-fluid -->
       </nav>
 </header>
+<style type="text/css">
+  h2{
+    font-size: 1.9em  !important;
+  }
+  li{
+    margin-left: 25px;
+  }
+
+</style>
