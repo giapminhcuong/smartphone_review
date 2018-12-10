@@ -1,35 +1,25 @@
-<h1>製品の比較</h1>
-
-<div class="row" data-number-of-products="<%= @number_of_products %>" id="body-products-chooser">
-    <div class="col-md-2">
-        <%= form_tag "/compare", method: :post, remote: true do %>
-        <div class="products-chooser">
-            <% (1..@number_of_products).each do |product_number| %>
-            <div id="product-container-<%= product_number %>">
-                <%= label_tag "products[#{product_number}]", "Product #{product_number} " %>
-                <%= select_tag "products[#{product_number}]", {}, class: "compared-product" %>
+<div class="compare-container">
+    <div class="row" data-number-of-products="<%= @number_of_products %>" id="body-products-chooser">
+        <div class="col-md-2">
+            <%= form_tag "/compare", method: :post, remote: true do %>
+            <div class="products-chooser">
+                <h4 class="title-choose-panel">比較したいプロダクトを選択してください</h4>
+                <% (1..@number_of_products).each do |product_number| %>
+                <div id="product-container-<%= product_number %>">
+                    <%= label_tag "products[#{product_number}]", "プロダクト #{product_number}" %>
+                    <%= select_tag "products[#{product_number}]", {}, class: "compared-product" %>
+                </div>
+                <% end %>
             </div>
+            <%= submit_tag "プロダクトの追加", {type: :button, class: "add-product-button"} %>
+            <%= submit_tag "比較", class: "compare-button" %>
             <% end %>
-
-
         </div>
-        <%= button_tag "Add product", {type: :button, class: "add-product-button"} %>
-        <%= submit_tag "Compare" %>
-        <% end %>
-    </div>
 
-    <div class="col-md-10" id="body-detail-comparison">
+        <div class="col-md-10">
+            <h1>製品の詳細を比較</h1>
+            <div id="body-detail-comparison">
+            </div>
+        </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('.compared-product').select2({
-        ajax: {
-          url: 'http://localhost:3000/products_json',
-          dataType: 'json'
-          // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-        }
-    });
-});
-</script>
