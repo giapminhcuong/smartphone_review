@@ -80,7 +80,6 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -112,7 +111,6 @@ CREATE TABLE public.makers (
 --
 
 CREATE SEQUENCE public.makers_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -146,7 +144,6 @@ CREATE TABLE public.pg_search_documents (
 --
 
 CREATE SEQUENCE public.pg_search_documents_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -179,7 +176,6 @@ CREATE TABLE public.product_reviews (
 --
 
 CREATE SEQUENCE public.product_reviews_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -245,7 +241,6 @@ CREATE TABLE public.products (
 --
 
 CREATE SEQUENCE public.products_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -316,7 +311,6 @@ CREATE TABLE public.reviews (
 --
 
 CREATE SEQUENCE public.reviews_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -392,7 +386,6 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE

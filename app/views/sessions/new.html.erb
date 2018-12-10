@@ -2,7 +2,7 @@
   <h1>サインイン</h1>
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 class_form">
       <%= form_for(:session, url: login_path) do |f| %>
 
         <%= f.label :email, "メールアドレス" %>
@@ -18,3 +18,10 @@
         <%= link_to "サインアップ", signup_path %></p>
   </div>
 </div>
+<style type="text/css">
+.class_form{
+  height: 400px;  
+padding: 30px 150px 10px 150px;
+}
+  
+</style>
