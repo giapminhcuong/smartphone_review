@@ -3,6 +3,8 @@
 
 var load_select2 = function() {
         $('.compared-product').select2({
+            allowClear: true,
+            placeholder: "プロダクトの名前",
             ajax: {
               url: 'http://localhost:3000/products_json',
               dataType: 'json'

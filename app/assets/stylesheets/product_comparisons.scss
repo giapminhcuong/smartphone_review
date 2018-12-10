@@ -1,3 +1,27 @@
 // Place all the styles related to the ProductComparisons controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.title-choose-panel {
+    text-align: center;
+    color: blue;
+}
+
+.compare-container {
+    margin: 50px;
+}
+
+.choosing-component {
+    margin: 10px;
+}
+
+.compare-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 50px !important;
+}
+
+.add-product-button {
+    margin-top: 10px;
+    height: 30px !important;
+}
